@@ -10,7 +10,7 @@
       <div class="header-right">
         <button class="btn">Português</button>
         <button class="btn">Entrar</button>
-        <button class="btn">Incrição</button>
+        <button class="btn btn-i">Inscrição</button>
       </div>
     </div>
   </div>
@@ -20,6 +20,7 @@
 .header-container {
   width: 100%;
   max-width: 1440px;
+  height: 4em;
   margin: 0 auto; 
   padding: 0 1em;
   display: flex;
@@ -36,7 +37,7 @@
 }
 .header-right {
   display: flex;
-  gap: 1.5em;
+  gap: 4.5em;
 }
 
 button {
@@ -52,5 +53,13 @@ button {
 .btn {
   color: white;
   cursor: pointer;
+}
+
+.btn-i {
+  border: white 1px solid;
+  border-radius: .5em;
+  width: 5em;
+  height: 2.5em; 
+  line-height: 2.5em; 
 }
 </style>
