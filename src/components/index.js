@@ -1,11 +1,12 @@
 import FooterComponent from "@/components/MainComponents/footer/FooterComponent.vue";
 import HeaderComponent from "@/components/MainComponents/header/HeaderComponent.vue"
-import CardCategoria from '@/components/homePage/cards/CardCategoria.vue'
-import CardService from '@/components/homePage/cards/CardService.vue'
-
+import CardsComponent from "@/components/homePage/cards/CardsComponent.vue";
+import CardServicos from "@/components/homePage/cards/CardServicos.vue";
+import CardsPrestadores from "@/components/homePage/cards/CardsPrestadores.vue"
 export {    
     FooterComponent,
     HeaderComponent,
-    CardCategoria,
-    CardService
+    CardServicos,
+    CardsComponent,
+    CardsPrestadores
 }

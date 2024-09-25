@@ -1,13 +1,13 @@
 <script setup>
-import { FooterComponent, HeaderComponent, CardCategoria, CardService } from "@/components";
+import { FooterComponent, HeaderComponent, CardsComponent, CardServicos, CardsPrestadores } from "@/components";
 </script>
 
 <template>
   <HeaderComponent/>
   <main>
-    Home
-    <CardCategoria/>
-    <CardService/>
+    <CardsComponent/>
+    <CardServicos/>
+    <CardsPrestadores/>
   </main>
   <FooterComponent/>
 </template>
