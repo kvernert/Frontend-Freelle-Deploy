@@ -5,7 +5,7 @@ import { FooterComponent, HeaderComponent, CardsComponent, CardServicos, CardsPr
 <template>
   <HeaderComponent/>
   <main>
-    <CardsComponent/>
+    <!-- <CardsComponent/> -->
     <CardServicos/>
     <CardsPrestadores/>
   </main>
