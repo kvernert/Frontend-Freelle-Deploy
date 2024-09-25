@@ -1,0 +1,132 @@
+<script setup>
+import { ref, onMounted, onUnmounted } from 'vue';
+
+const videoOpacity = ref(1);
+const isMobile = ref(false);
+
+const checkIfMobile = () => {
+  isMobile.value = window.innerWidth <= 768;
+};
+
+const handleScroll = () => {
+  if (!isMobile.value) {
+    const scrollPosition = window.scrollY;
+    videoOpacity.value = 1 - scrollPosition / 500; 
+  }
+};
+
+onMounted(() => {
+  checkIfMobile();
+  window.addEventListener('resize', checkIfMobile);
+  window.addEventListener('scroll', handleScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('resize', checkIfMobile);
+  window.removeEventListener('scroll', handleScroll);
+});
+</script>
+
+<template>
+  <div class="video-section">
+    <div class="parallax" :style="{ opacity: isMobile ? 1 : videoOpacity }">
+      <video autoplay muted loop id="myVideo" :class="{ mobile: isMobile }">
+        <source src="https://fiverr-res.cloudinary.com/video/upload/t_fiverr_hd/v1/video-attachments/generic_asset/asset/4152775255ab950937446041bfcf0a5a-1726568449715/HFW%20PT%20Subs%2016x9" type="video/mp4">
+      </video>
+      <div class="search-bar" :class="{ mobile: isMobile }">
+        <input type="text" placeholder="Pesquise por qualquer serviço..." class="search-input" :class="{ mobile: isMobile }">
+        <button class="search-btn"><i class="mdi mdi-magnify" size="90"/></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="parallax" :style="{ opacity: 1 - videoOpacity }">
+      <div class="overlay" :style="{ opacity: 1 - videoOpacity }">
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.video-section {
+  margin-top: 0; 
+  position: relative;
+  height: 100vh; 
+}
+
+.parallax {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#myVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#myVideo.mobile {
+  object-fit: contain;
+}
+
+.search-bar {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 20px;
+}
+
+.search-bar.mobile {
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.search-input {
+  width: 700px; 
+  height: 70px;
+  padding: 15px;
+  border-radius: 5px;
+  background: #ccc;
+  border: 1px solid #ccc;
+  font-size: 15px;
+}
+
+.search-input.mobile {
+  width: 300px; 
+  height: 50px; 
+  padding: 10px; 
+}
+
+.search-btn {
+  padding: 15px 30px;
+  background-color: #006B63;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.overlay {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+  font-size: 24px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.5s, transform 0.5s;
+}
+</style>

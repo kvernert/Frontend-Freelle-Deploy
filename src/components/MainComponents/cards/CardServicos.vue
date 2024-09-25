@@ -1,9 +1,9 @@
 <script setup>
 const cards = [
-  { title: 'Desenvolvimento de Sites', image: 'link-da-imagem-1.png', bgColor: 'green-bg' },
-  { title: 'Logotipo', image: 'link-da-imagem-2.png', bgColor: 'orange-bg' },
-  { title: 'SEO', image: 'link-da-imagem-3.png', bgColor: 'dark-green-bg' },
-  { title: 'Arquitetura e Design de Interiores', image: 'link-da-imagem-4.png', bgColor: 'brown-bg' }
+  { title: 'Desenvolvimento de Sites', image: 'https://fiverr-res.cloudinary.com/q_auto,f_auto,w_188,dpr_1.0/v1/attachments/generic_asset/asset/798403f5b92b1b5af997acc704a3d21c-1702465156477/website-development.png', bgColor: 'green-bg' },
+  { title: 'Logotipo', image: 'https://fiverr-res.cloudinary.com/q_auto,f_auto,w_188,dpr_1.0/v1/attachments/generic_asset/asset/798403f5b92b1b5af997acc704a3d21c-1702465156494/logo-design.png', bgColor: 'orange-bg' },
+  { title: 'SEO', image: 'https://fiverr-res.cloudinary.com/q_auto,f_auto,w_188,dpr_1.0/v1/attachments/generic_asset/asset/798403f5b92b1b5af997acc704a3d21c-1702465156488/seo.png', bgColor: 'dark-green-bg' },
+  { title: 'Arquitetura e Design de Interiores', image: 'https://fiverr-res.cloudinary.com/q_auto,f_auto,w_188,dpr_1.0/v1/attachments/generic_asset/asset/798403f5b92b1b5af997acc704a3d21c-1702465156473/architecture-design.png', bgColor: 'brown-bg' }
 ];
 </script>
 
@@ -39,35 +39,36 @@ h2 {
 }
 
 .card {
-  border-radius: 15px;
-  width: 250px;
-  height: 150px;
-  padding: 20px;
+  border-radius: 8px; 
+  width: 350px; 
+  height: 160px; 
+  padding: 15px; 
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  flex-direction: row; 
+  align-items: center; 
   color: white;
-  position: relative;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); 
   transition: transform 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
 .card-image {
-  width: 80px;
-  height: 80px;
+  width: 200px; 
+  height: 130px;
+  border-radius: 8px;
   object-fit: contain;
-  position: absolute;
-  top: 10px;
-  left: 10px;
 }
 
 h3 {
   margin: 0;
   font-size: 18px;
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
+  margin-left: 5px; 
 }
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
 
 .green-bg {
   background-color: #1e7c1e;
