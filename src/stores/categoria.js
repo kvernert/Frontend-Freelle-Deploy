@@ -4,11 +4,21 @@ import {CategoriaService} from '@/services'
 
 export const useCategoriasStore = defineStore('categoria', () => {
   const state = reactive({
-    categorias: [] 
+    categorias: [],
+    listaCategorias: [
+        { id: 1, nome: 'Categoria 1' },
+        { id: 2, nome: 'Categoria 2' },
+        { id: 3, nome: 'Categoria 3' }
+      ]
   })
 
   const categorias = computed(() => state.categorias) 
 
+  const Listacategorias = computed(() => state.listaCategorias);
+
+  const getAllListaCategorias = () => {
+    return state.listaCategorias;
+  };
   const getAllCategorias = async () => { 
     const data = await CategoriaService.getAllCategorias()
     state.categorias = data
@@ -32,5 +42,5 @@ export const useCategoriasStore = defineStore('categoria', () => {
     }
   }
 
-  return { categorias, getAllCategorias, createCategoria, deleteCategoria, updateCategoria } 
+  return { categorias, getAllCategorias, createCategoria, deleteCategoria, updateCategoria, Listacategorias, getAllListaCategorias } 
 })

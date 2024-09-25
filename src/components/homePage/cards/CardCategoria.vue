@@ -1,18 +1,34 @@
-<script>
-</script>
-
 <template>
-    <div class="container-card">
-        <div class="icon">                
-            <i class="mdi mdi-monitor"></i>
-        </div>
-        <div class="title">
-            Programação e Tecnologia
-        </div>
+  <div class="wrap">
+  <div class="container-card" v-for="categoria in categorias" :key="categoria.id">
+    <div class="icon">                
+      <i class="mdi mdi-monitor"></i>
     </div>
+    <div class="title">
+      {{ categoria.nome }}
+    </div>
+  </div>
+  </div>
 </template>
 
+<script setup>
+import { useCategoriasStore } from '@/stores'; 
+import { onMounted } from 'vue';
+
+const categoriasStore = useCategoriasStore();
+
+onMounted(async () => {
+  await categoriasStore.getAllListaCategorias(); 
+});
+
+const categorias = categoriasStore.Listacategorias; 
+</script>
+
 <style scoped>
+.wrap{
+  display: flex;
+  gap: 15px;
+}
 .container-card {
   width: 150px; 
   padding: 1em;
