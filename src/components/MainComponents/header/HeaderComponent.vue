@@ -19,7 +19,7 @@
 <style scoped>
 .header-container {
   width: 100%;
-  max-width: 1220px;
+  max-width: 1460px;
   height: 4em;
   margin: 0 auto; 
   padding: 0 1em;

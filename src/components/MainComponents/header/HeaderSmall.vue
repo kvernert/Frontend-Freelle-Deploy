@@ -2,22 +2,44 @@
 </script>
 
 <template>
-      <div class="header">
-        <div class="header-container">
-            <div class="header-left">
-                <img src="https://i.ibb.co/1KNDQpw/Freelee-icon.png" alt="" class="img">
-            </div>
-        </div>
+  <div class="header-small">
+    <div class="header-container">
+      <div class="header-left">
+        <img src="https://i.ibb.co/1KNDQpw/Freelee-icon.png" alt="Logo" class="img">
+      </div>
+      <logo-title class="pl-0" />
+      <div class="icons">
+        <i class="mdi mdi-magnify" />
+      </div>
     </div>
-  <logo-title class="pl-0" />
-  <div class="icons">
-    <i class="mdi mdi-magnify" />
-  </div>
+    </div>
 </template>
 
 <style scoped>
-.pl-0 {
-  padding-left: 0rem;
+.header-small {
+  width: 100%;
+  background-color: #006B63; 
+  margin: 0;
+  height: 4em;
+}
+
+.header-container {
+  width: 100%;
+  max-width: 1460px;
+  margin: 0 auto; 
+  padding: 0 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+}
+
+.header-left {
+  display: flex;
+}
+
+.img {
+  width: 60px;
+  height: 60px;
 }
 
 .icons {
@@ -25,5 +47,6 @@
   gap: 1rem;
   align-items: center;
   font-size: 1.7rem;
+  color: white;
 }
 </style>

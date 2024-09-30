@@ -7,9 +7,8 @@ const providers = [
     rating: 5.0,
     image: 'https://avatars.githubusercontent.com/u/106837380?v=4',
     social: {
-      linkedin: 'link-do-linkedin',
-      instagram: 'link-do-instagram',
-      telegram: 'link-do-telegram'
+      linkedin: 'https://github.com/GabrielLima2803',
+      instagram: 'https://www.instagram.com/_.lima1/',
     }
   },
   {
@@ -19,9 +18,8 @@ const providers = [
     rating: 5.0,
     image: 'https://avatars.githubusercontent.com/u/106837380?v=4',
     social: {
-      linkedin: 'link-do-linkedin',
-      instagram: 'link-do-instagram',
-      telegram: 'link-do-telegram'
+      linkedin: 'https://github.com/GabrielLima2803',
+      instagram: 'https://www.instagram.com/_.lima1/',
     }
   },
   {
@@ -31,9 +29,8 @@ const providers = [
     rating: 5.0,
     image: 'https://avatars.githubusercontent.com/u/106837380?v=4',
     social: {
-      linkedin: 'link-do-linkedin',
-      instagram: 'link-do-instagram',
-      telegram: 'link-do-telegram'
+      linkedin: 'https://github.com/GabrielLima2803',
+      instagram: 'https://www.instagram.com/_.lima1/',
     }
   }
 ];
@@ -169,8 +166,8 @@ h2 {
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 5px 10px;
-  cursor: pointer;
   transition: background-color 0.3s ease;
+  cursor: pointer;
 }
 
 .btn i {
@@ -187,4 +184,16 @@ h2 {
   color: #000000;
   font-size: 25px;
 }
+@media (max-width: 1500px) {
+  .provider-container {
+    display: flex;
+    flex-direction: column; 
+    gap: 20px; 
+  }
+
+  .provider-card {
+    width: 100%; 
+  }
+}
+
 </style>

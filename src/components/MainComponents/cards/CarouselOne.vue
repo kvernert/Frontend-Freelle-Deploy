@@ -30,7 +30,7 @@ onUnmounted(() => {
 <template>
   <div class="video-section">
     <div class="parallax" :style="{ opacity: isMobile ? 1 : videoOpacity }">
-      <video autoplay muted loop id="myVideo" :class="{ mobile: isMobile }">
+      <video autoplay muted loop id="myVideo">
         <source src="https://fiverr-res.cloudinary.com/video/upload/t_fiverr_hd/v1/video-attachments/generic_asset/asset/4152775255ab950937446041bfcf0a5a-1726568449715/HFW%20PT%20Subs%2016x9" type="video/mp4">
       </video>
       <div class="search-bar" :class="{ mobile: isMobile }">
@@ -50,18 +50,23 @@ onUnmounted(() => {
 
 <style scoped>
 .video-section {
-  margin-top: 0; 
   position: relative;
-  height: 100vh; 
+  height: 500px;
 }
 
 .parallax {
-  position: relative;
+  position: fixed;
+  top: 60px;
+  left: 0;
   width: 100%;
-  height: 100%;
+  min-height: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   overflow: hidden;
 }
 
@@ -69,10 +74,6 @@ onUnmounted(() => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-#myVideo.mobile {
-  object-fit: contain;
 }
 
 .search-bar {
@@ -119,14 +120,17 @@ onUnmounted(() => {
 .overlay {
   position: absolute;
   left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   padding: 20px;
   border-radius: 10px;
   color: white;
   font-size: 24px;
   text-align: center;
   opacity: 0;
-  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s, top 0.5s, transform 0.5s;
 }
-</style>
+
+.overlay {
+  margin: 0;
+}
+</style> 
