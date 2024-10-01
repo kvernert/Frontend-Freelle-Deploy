@@ -1,13 +1,7 @@
-<script setup>
-import { FooterComponent, HeaderComponent, CardsComponent, CardServicos, CardsPrestadores } from "@/components";
-</script>
+<script setup></script>
 
 <template>
-  <HeaderComponent/>
-  <main>
-    <!-- <CardsComponent/> -->
-    <CardServicos/>
-    <CardsPrestadores/>
-  </main>
-  <FooterComponent/>
+  <RouterView />
 </template>
+
+<style scoped></style>
