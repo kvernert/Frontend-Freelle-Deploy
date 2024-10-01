@@ -1,4 +1,5 @@
-<script setup></script>
+<script setup>
+</script>
 
 <template>
   <div id="footerMenu">
@@ -6,7 +7,7 @@
       <RouterLink to="/">
         <i class="mdi mdi-home-outline" />
       </RouterLink>
-      <RouterLink to="/">
+      <RouterLink to="/login">
         <i class="mdi mdi-account-circle-outline" />
       </RouterLink>
       <RouterLink to="/">
