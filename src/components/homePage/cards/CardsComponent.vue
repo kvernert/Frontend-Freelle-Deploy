@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted } from 'vue'
 
 const cards = [
   { title: 'Programação e Tecnologia', icon: 'mdi mdi-monitor' },
@@ -12,30 +12,30 @@ const cards = [
   { title: 'Consultoria', icon: 'mdi mdi-account-switch' },
   { title: 'Motoboy e Entregas', icon: 'mdi mdi-motorbike' },
   { title: 'Garçom', icon: 'mdi mdi-linux' },
-  { title: 'Manobrista', icon: 'mdi mdi-car' },
-];
+  { title: 'Manobrista', icon: 'mdi mdi-car' }
+]
 
-const currentIndex = ref(0);
+const currentIndex = ref(0)
 
 const next = () => {
-  currentIndex.value = (currentIndex.value + 1) % cards.length;
-};
+  currentIndex.value = (currentIndex.value + 1) % cards.length
+}
 
 const prev = () => {
-  currentIndex.value = (currentIndex.value - 1 + cards.length) % cards.length;
-};
+  currentIndex.value = (currentIndex.value - 1 + cards.length) % cards.length
+}
 
-const isMediumScreen = computed(() => window.innerWidth > 768 && window.innerWidth <= 1500);
-const isSmallScreen = computed(() => window.innerWidth <= 768);
+const isMediumScreen = computed(() => window.innerWidth > 768 && window.innerWidth <= 1500)
+const isSmallScreen = computed(() => window.innerWidth <= 768)
 
 const handleResize = () => {
-  isMediumScreen.value = window.innerWidth > 768 && window.innerWidth <= 1500;
-  isSmallScreen.value = window.innerWidth <= 768;
-};
+  isMediumScreen.value = window.innerWidth > 768 && window.innerWidth <= 1500
+  isSmallScreen.value = window.innerWidth <= 768
+}
 
 onMounted(() => {
-  window.addEventListener('resize', handleResize);
-});
+  window.addEventListener('resize', handleResize)
+})
 </script>
 
 <template>
@@ -44,7 +44,13 @@ onMounted(() => {
       <div class="arrow left" @click="prev" v-if="isSmallScreen || isMediumScreen">‹</div>
       <div class="carousel" v-if="isSmallScreen || isMediumScreen">
         <div class="cards">
-          <div v-for="(card, index) in (isMediumScreen ? cards.slice(currentIndex, currentIndex + 6) : cards.slice(currentIndex, currentIndex + 3))" :key="index" class="card">
+          <div
+            v-for="(card, index) in isMediumScreen
+              ? cards.slice(currentIndex, currentIndex + 6)
+              : cards.slice(currentIndex, currentIndex + 3)"
+            :key="index"
+            class="card"
+          >
             <router-link v-if="card.title === 'Design Gráfico'" :to="{ name: 'design' }">
               <div class="icon-title">
                 <i :class="card.icon" class="card-icon"></i>
@@ -61,7 +67,11 @@ onMounted(() => {
       <div v-else>
         <div class="cards">
           <div v-for="(card, index) in cards" :key="index" class="card">
-            <router-link v-if="card.title === 'Design Gráfico'" :to="{ name: 'design' }">
+            <router-link
+              v-if="card.title === 'Design Gráfico'"
+              :to="{ name: 'design' }"
+              style="text-decoration: none"
+            >
               <div class="icon-title">
                 <i :class="card.icon" class="card-icon"></i>
                 <h3 class="card-title">{{ card.title }}</h3>
@@ -89,27 +99,29 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   position: relative;
-  overflow: hidden; 
+  overflow: hidden;
   padding-top: 5px;
   padding-bottom: 5px;
-  padding-left: 60px; 
-  padding-right: 60px; 
+  padding-left: 60px;
+  padding-right: 60px;
 }
 
 .cards {
   display: flex;
-  gap: 10px; 
+  gap: 10px;
 }
 
 .card {
   background-color: white;
   border-radius: 10px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  width: 120px; 
-  height: 120px; 
+  width: 120px;
+  height: 120px;
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   cursor: pointer;
   padding: 10px;
 }
@@ -122,7 +134,8 @@ onMounted(() => {
 .icon-title {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; 
+  align-items: flex-start;
+  color: black;
 }
 
 .card-icon {
@@ -134,6 +147,7 @@ onMounted(() => {
   font-size: 12px;
   color: #333;
   margin: 0;
+  text-decoration: none;
 }
 
 .arrow {
@@ -147,10 +161,10 @@ onMounted(() => {
 }
 
 .left {
-  left: 10px; 
+  left: 10px;
 }
 
 .right {
-  right: 10px; 
+  right: 10px;
 }
 </style>

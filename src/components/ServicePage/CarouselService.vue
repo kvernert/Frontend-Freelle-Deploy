@@ -3,6 +3,7 @@
         <h1>Design Gráfico</h1>
     </div>
     <div class="container">
+        <img src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/0426b6ab656cedb4697336a530541d50-1688626333573/Digital%20Marketing-%20Desktop%20banner.png" alt="">
     </div>
 </template>
 
@@ -13,34 +14,32 @@
     }
 
     .container {
-        max-width: 100%;
-        height: 40vh;
-        margin: 0 auto;
-        background-color: #006B63;
-        border-radius: 8px;
+    max-width: 100%;
+    height: auto; 
+    margin: 0 auto;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+}
+
+.container img {
+    max-width: 100%;
+    height: auto; 
+    border-radius: 8px; 
+}
+
+
+@media (max-width: 768px) {
+    .container {
+        height: auto;
     }
+}
 
-    @media (max-width: 768px) {
-        .box-title {
-            text-align: center;
-            padding: 3em 0; 
-        }
-
-        .container {
-            height: 30vh; 
-        }
+@media (max-width: 480px) {
+    .container {
+        height: auto;
     }
-
-    @media (max-width: 480px) {
-        .box-title {
-            text-align: center;
-            padding: 2em 0; 
-            font-size: 1.5em; 
-        }
-
-        .container {
-            height: 25vh; 
-            border-radius: 6px;
-        }
-    }
+}
 </style>
