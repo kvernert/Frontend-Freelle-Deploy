@@ -5,12 +5,12 @@
     <div class="header">
         <div class="header-container">
             <div class="header-left">
-                <img src="https://i.ibb.co/1KNDQpw/Freelee-icon.png" alt="" class="img">
+              <router-link to="/" class="btn"><img src="https://i.ibb.co/1KNDQpw/Freelee-icon.png" alt="" class="img"></router-link>
             </div>
             <div class="header-right">
                 <button class="btn">Português</button>
-                <button class="btn">Entrar</button>
-                <router-link to="/login" class="btn btn-i">Inscrição</router-link>
+                <router-link to="/login" class="btn">Entrar</router-link>
+                <button class="btn btn-i">Inscrição</button>
             </div>
         </div>
     </div>
@@ -36,8 +36,8 @@
 }
 
 .img {
-  width: auto;
-  height: auto;
+  width: 63px;
+  height: 60px;
 }
 
 .header-right {
@@ -57,7 +57,10 @@ button {
   cursor: pointer;
   color: white;
 }
-
+.btn{
+    text-decoration: none;
+  color: white;
+}
 .btn-i {
   border: white 1.5px solid;
   border-radius: 0.5em;

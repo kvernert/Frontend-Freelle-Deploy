@@ -1,22 +1,37 @@
 <script setup>
-import { FooterComponent, HeaderComponent, HeaderSmall, FooterSmall}  from "@/components"
+import { FooterComponent, HeaderComponent, HeaderSmall, FooterSmall } from "@/components";
+import { ref, onMounted } from 'vue';
+
+const isSmallScreen = ref(false);
+
+const checkScreenSize = () => {
+  isSmallScreen.value = window.innerWidth <= 768;
+};
+
+onMounted(() => {
+  checkScreenSize();
+  window.addEventListener('resize', checkScreenSize);
+});
 </script>
 
 <template>
+  <!-- Header Grande (escondido em telas pequenas) -->
+  <header-component v-if="!isSmallScreen" />
+  <!-- Header Pequeno (exibido apenas em telas pequenas) -->
+  <header-small v-if="isSmallScreen" />
+
   <div class="wrapContainer">
+    <div class="FormTop">
+      <img src="https://i.ibb.co/1KNDQpw/Freelee-icon.png" alt="Logo" class="logo" />
+    </div>
     <div class="containerPrincipal">
-      <!-- Topo com a logo -->
-      <div class="FormTop">
-        <img src="https://i.ibb.co/1KNDQpw/Freelee-icon.png" alt="Logo" width="220" />
-      </div>
-      
-      <!-- Corpo do formulário -->
       <div class="FormBot">
-        <form action="" @submit.prevent="login" class="wrapForm">
-          <h4>Olá!</h4>
-          <p class="FormP">Para continuar, digite seu e-mail</p>
-          
-          <!-- Campo de email -->
+        <form @submit.prevent="login" class="wrapForm">
+          <!-- "Olá!" alinhado à esquerda -->
+          <h4 class="TextLeft">Olá!</h4>
+          <!-- Texto "Para continuar, digite seu e-mail" alinhado à esquerda -->
+          <p class="FormPLeft">Para continuar, digite seu e-mail</p>
+
           <div class="input-container">
             <input
               type="text"
@@ -25,8 +40,6 @@ import { FooterComponent, HeaderComponent, HeaderSmall, FooterSmall}  from "@/co
             />
             <label for="username" class="labelForm">E-mail</label>
           </div>
-          
-          <!-- Campo de senha -->
           <div class="input-container">
             <input
               type="password"
@@ -35,10 +48,9 @@ import { FooterComponent, HeaderComponent, HeaderSmall, FooterSmall}  from "@/co
             />
             <label for="password" class="labelForm">Senha</label>
           </div>
-          
-          <!-- Links e botões -->
-          <button type="button" style="margin-top: 10px">
-            <router-link class="btnSenha" to="/">Esqueci minha senha</router-link>
+
+          <button type="button" style="margin-top: 10px" class="btnSenha">
+            <router-link to="/" class="btnSenha">Esqueci minha senha</router-link>
           </button>
           <button type="submit" class="btnLogin mt-3">Entrar</button>
           <router-link to="/">
@@ -48,17 +60,25 @@ import { FooterComponent, HeaderComponent, HeaderSmall, FooterSmall}  from "@/co
         </form>
       </div>
     </div>
-    </div>
+  </div>
+<div class="footer">
+  <!-- Footer Grande (escondido em telas pequenas) -->
+  <footer-component v-if="!isSmallScreen" />
+  <!-- Footer Pequeno (exibido apenas em telas pequenas) -->
+  <footer-small v-if="isSmallScreen" />
+</div>
 </template>
 
 <style scoped>
-
-body {
-  background: #006f56; 
+.body {
+  background: #006B63;
   height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
+  color: white;
+  font-family: 'Arial', sans-serif;
 }
 
 .wrapContainer {
@@ -67,23 +87,30 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100vh; 
-  background: #006f56; 
+  min-height: 100vh;
+  background: #006B63;
 }
 
 .containerPrincipal {
   width: 440px;
   background-color: white;
   padding: 40px;
-  border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  margin-bottom: 20px;
+  text-align: center; /* Mantém o restante do formulário centralizado */
 }
 
-.FormTop {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
+.logo {
+  width: 160px;
+}
+
+.TextLeft {
+  font-size: bold;
+  text-align: left; /* Alinha o texto "Olá!" à esquerda */
+}
+
+.FormPLeft {
+  text-align: left; /* Alinha o texto "Para continuar, digite seu e-mail" à esquerda */
 }
 
 .input-container {
@@ -95,8 +122,7 @@ body {
   width: 100%;
   height: 50px;
   padding: 15px;
-  border: 1px solid #006f56;
-  border-radius: 4px;
+  border: 1px solid #006B63;
   outline: none;
   transition: all 0.3s;
 }
@@ -126,61 +152,81 @@ body {
   margin-top: 15px;
   font-size: 18px;
   font-weight: bold;
-  border-radius: 4px;
 }
 
 .btnLogin {
-  background-color: #006f56;
+  background-color: #006B63;
   color: white;
   border: none;
 }
 
 .btnCriar {
   background-color: white;
-  border: 2px solid #006f56;
-  color: #006f56;
+  border: 2px solid #006B63;
+  color: #006B63;
+  transition: all 0.3s ease; /* Transição para o hover */
+}
+
+.btnCriar:hover {
+  background-color: #006B63; /* Cor de fundo no hover */
+  color: white; /* Cor do texto no hover */
 }
 
 .btnSenha {
-  background-color: white;
-  color: #006f56;
+  margin-top: 20px;
   border: none;
-  text-decoration: underline;
+  border-bottom: solid 1px #006B63;
+  background-color: white;
+  color: gray;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.btnSenha:hover {
+  color: #006B63;
+  transition: 0.7s;
+}
+
+.Pf {
+  font-size: 12px;
+  margin-top: 30px;
 }
 
 .footer {
-  text-align: center;
-  margin-top: 20px;
-  color: white;
+  background: #006B63;
 }
 
-.footer p {
-  margin: 5px 0;
+/* Estilos para telas pequenas */
+@media (max-width: 768px) {
+  .containerPrincipal {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .btnLogin, .btnCriar {
+    font-size: 16px;
+    height: 40px;
+  }
+
+  .logo {
+    width: 140px; /* Diminui mais o tamanho da logo em telas pequenas */
+  }
 }
 
-.social-icons {
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
-}
+@media (max-width: 576px) {
+  .containerPrincipal {
+    width: 80%;
+    padding: 15px;
+  }
 
-.social-icon {
-  width: 40px;
-  height: 40px;
-  background-color: white;
-  color: #006f56;
-  border: 1px solid #006f56;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  margin: 0 10px;
-  cursor: pointer;
-}
+  .inputForm {
+    height: 40px;
+    padding: 10px;
+  }
 
-.social-icon:hover {
-  background-color: #006f56;
-  color: white;
+  .btnLogin, .btnCriar {
+    height: 35px;
+    font-size: 14px;
+  }
 }
 </style>
