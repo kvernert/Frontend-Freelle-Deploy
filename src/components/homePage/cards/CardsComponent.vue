@@ -36,7 +36,6 @@ const handleResize = () => {
 onMounted(() => {
   window.addEventListener('resize', handleResize);
 });
-
 </script>
 
 <template>
@@ -46,7 +45,13 @@ onMounted(() => {
       <div class="carousel" v-if="isSmallScreen || isMediumScreen">
         <div class="cards">
           <div v-for="(card, index) in (isMediumScreen ? cards.slice(currentIndex, currentIndex + 6) : cards.slice(currentIndex, currentIndex + 3))" :key="index" class="card">
-            <div class="icon-title">
+            <router-link v-if="card.title === 'Design Gráfico'" :to="{ name: 'design' }">
+              <div class="icon-title">
+                <i :class="card.icon" class="card-icon"></i>
+                <h3 class="card-title">{{ card.title }}</h3>
+              </div>
+            </router-link>
+            <div v-else class="icon-title">
               <i :class="card.icon" class="card-icon"></i>
               <h3 class="card-title">{{ card.title }}</h3>
             </div>
@@ -56,7 +61,13 @@ onMounted(() => {
       <div v-else>
         <div class="cards">
           <div v-for="(card, index) in cards" :key="index" class="card">
-            <div class="icon-title">
+            <router-link v-if="card.title === 'Design Gráfico'" :to="{ name: 'design' }">
+              <div class="icon-title">
+                <i :class="card.icon" class="card-icon"></i>
+                <h3 class="card-title">{{ card.title }}</h3>
+              </div>
+            </router-link>
+            <div v-else class="icon-title">
               <i :class="card.icon" class="card-icon"></i>
               <h3 class="card-title">{{ card.title }}</h3>
             </div>
