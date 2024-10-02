@@ -10,6 +10,8 @@ const app = createApp(App)
 
 import '@mdi/font/css/materialdesignicons.min.css';
 
+import './plugins/axios';
+
 app.use(createPinia())
 app.use(router)
 
