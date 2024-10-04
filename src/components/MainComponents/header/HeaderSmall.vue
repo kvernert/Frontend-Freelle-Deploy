@@ -5,7 +5,7 @@
   <div class="header-small">
     <div class="header-container">
       <div class="header-left">
-        <img src="https://i.ibb.co/1KNDQpw/Freelee-icon.png" alt="Logo" class="img">
+        <router-link to="/" class="btn"><img src="https://i.ibb.co/1KNDQpw/Freelee-icon.png" alt="" class="img"></router-link>
       </div>
       <logo-title class="pl-0" />
       <div class="icons">

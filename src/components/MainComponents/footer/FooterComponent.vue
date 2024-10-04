@@ -26,6 +26,7 @@
     bottom: 0;
     width: 100%;
     font-family: "Inter", sans-serif;
+    padding-top: 5em;
 }
 .container-top {
     position: relative;
