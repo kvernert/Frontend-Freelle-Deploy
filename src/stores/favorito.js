@@ -11,7 +11,7 @@ export const useFavoritosStore = defineStore('favorito', () => {
 
   const getAllFavoritos = async () => {
     const data = await FavoritoService.getAllFavoritos();
-    state.favoritos = data;
+    state.favoritos = data.results;
   };
 
   const createFavorito = async (favoritoData) => {
