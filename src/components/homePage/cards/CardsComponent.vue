@@ -1,32 +1,27 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
+import { useCategoriasStore } from '@/stores';
 
-const cards = [
-  { title: 'Programação e Tecnologia', icon: 'mdi mdi-monitor' },
-  { title: 'Design Gráfico', icon: 'mdi mdi-palette-advanced' },
-  { title: 'Redação e Tradução', icon: 'mdi mdi-comment-text' },
-  { title: 'Vídeo e Animação', icon: 'mdi mdi-presentation-play' },
-  { title: 'Música e Áudio', icon: 'mdi mdi-music-note' },
-  { title: 'Negócios', icon: 'mdi mdi-account-multiple' },
-  { title: 'Marketing Digital', icon: 'mdi mdi-television-guide' },
-  { title: 'Consultoria', icon: 'mdi mdi-account-switch' },
-  { title: 'Motoboy e Entregas', icon: 'mdi mdi-motorbike' },
-  { title: 'Garçom', icon: 'mdi mdi-linux' },
-  { title: 'Manobrista', icon: 'mdi mdi-car' },
-];
-
+const categoriaStore = useCategoriasStore();
+const categorias = computed(() => categoriaStore.categorias); 
 const currentIndex = ref(0);
 
 const next = () => {
-  currentIndex.value = (currentIndex.value + 1) % cards.length;
+  if (categorias.value.length) {
+    const step = isMediumScreen.value ? 6 : 3;
+    currentIndex.value = (currentIndex.value + step) % categorias.value.length;
+  }
 };
 
 const prev = () => {
-  currentIndex.value = (currentIndex.value - 1 + cards.length) % cards.length;
+  if (categorias.value.length) {
+    const step = isMediumScreen.value ? 6 : 3;
+    currentIndex.value = (currentIndex.value - step + categorias.value.length) % categorias.value.length;
+  }
 };
 
-const isMediumScreen = computed(() => window.innerWidth > 768 && window.innerWidth <= 1500);
-const isSmallScreen = computed(() => window.innerWidth <= 768);
+const isMediumScreen = ref(window.innerWidth > 768 && window.innerWidth <= 1500);
+const isSmallScreen = ref(window.innerWidth <= 768);
 
 const handleResize = () => {
   isMediumScreen.value = window.innerWidth > 768 && window.innerWidth <= 1500;
@@ -35,41 +30,52 @@ const handleResize = () => {
 
 onMounted(() => {
   window.addEventListener('resize', handleResize);
+  categoriaStore.getAllCategorias();
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', handleResize);
 });
 </script>
 
 <template>
-  <div class="card-section">
+  <div class="card-section" v-if="categorias && categorias.length"> 
     <div class="card-container">
       <div class="arrow left" @click="prev" v-if="isSmallScreen || isMediumScreen">‹</div>
       <div class="carousel" v-if="isSmallScreen || isMediumScreen">
         <div class="cards">
-          <div v-for="(card, index) in (isMediumScreen ? cards.slice(currentIndex, currentIndex + 6) : cards.slice(currentIndex, currentIndex + 3))" :key="index" class="card">
-            <router-link v-if="card.title === 'Design Gráfico'" :to="{ name: 'design' }">
+          <div 
+            v-for="(card, index) in (isMediumScreen ? categorias.slice(currentIndex, currentIndex + 6) : categorias.slice(currentIndex, currentIndex + 3))" 
+            :key="index" 
+            class="card">
+            <router-link v-if="card.nome === 'Design Gráfico'" :to="{ name: 'design' }" class="router-link">
               <div class="icon-title">
                 <i :class="card.icon" class="card-icon"></i>
-                <h3 class="card-title">{{ card.title }}</h3>
+                <h3 class="card-title">{{ card.nome }}</h3>
               </div>
             </router-link>
             <div v-else class="icon-title">
               <i :class="card.icon" class="card-icon"></i>
-              <h3 class="card-title">{{ card.title }}</h3>
+              <h3 class="card-title">{{ card.nome }}</h3>
             </div>
           </div>
         </div>
       </div>
       <div v-else>
         <div class="cards">
-          <div v-for="(card, index) in cards" :key="index" class="card">
+          <div 
+            v-for="(card, index) in categorias" 
+            :key="index" 
+            class="card">
             <router-link v-if="card.title === 'Design Gráfico'" :to="{ name: 'design' }">
               <div class="icon-title">
                 <i :class="card.icon" class="card-icon"></i>
-                <h3 class="card-title">{{ card.title }}</h3>
+                <h3 class="card-title">{{ card.nome }}</h3>
               </div>
             </router-link>
             <div v-else class="icon-title">
               <i :class="card.icon" class="card-icon"></i>
-              <h3 class="card-title">{{ card.title }}</h3>
+              <h3 class="card-title">{{ card.nome }}</h3>
             </div>
           </div>
         </div>
@@ -153,4 +159,15 @@ onMounted(() => {
 .right {
   right: 10px; 
 }
+.router-link {
+  color: black;
+  text-decoration: none;
+}
+
+.router-link-active,
+.router-link-exact-active {
+  color: inherit;
+  text-decoration: none;
+}
+
 </style>
