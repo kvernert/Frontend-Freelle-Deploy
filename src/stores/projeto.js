@@ -11,7 +11,7 @@ export const useProjetosStore = defineStore('projeto', () => {
 
   const getAllProjetos = async () => {
     const data = await ProjetoService.getAllProjetos()
-    state.projetos = data
+    state.projetos = data.results
   }
 
   const createProjeto = async (projetoData) => {
