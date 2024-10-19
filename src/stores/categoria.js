@@ -1,46 +1,54 @@
 import { defineStore } from 'pinia'
 import { computed, reactive } from 'vue'
-import {CategoriaService} from '@/services' 
+import { CategoriaService } from '@/services'
 
 export const useCategoriasStore = defineStore('categoria', () => {
   const state = reactive({
     categorias: [],
-    listaCategorias: [
-        { id: 1, nome: 'Categoria 1' },
-        { id: 2, nome: 'Categoria 2' },
-        { id: 3, nome: 'Categoria 3' }
-      ]
   })
 
   const categorias = computed(() => state.categorias) 
 
-  const Listacategorias = computed(() => state.listaCategorias);
-
-  const getAllListaCategorias = () => {
-    return state.listaCategorias;
-  };
   const getAllCategorias = async () => { 
-    const data = await CategoriaService.getAllCategorias()
-    state.categorias = data
-  }
-
-  const createCategoria = async (categoriaData) => { 
-    const data = await CategoriaService.createCategoria(categoriaData)
-    state.categorias.push(data)
-  }
-
-  const deleteCategoria = async (id) => { 
-    await CategoriaService.deleteCategoria(id)
-    state.categorias = state.categorias.filter((categoria) => categoria.id !== id) 
-  }
-
-  const updateCategoria = async (id, categoriaData) => { 
-    const updatedCategoria = await CategoriaService.updateCategoria(id, categoriaData)
-    const index = state.categorias.findIndex((categoria) => categoria.id === id) 
-    if (index !== -1) {
-      state.categorias[index] = updatedCategoria
+    try {
+      const data = await CategoriaService.getAllCategorias()
+      console.log('Resposta da API:', data.results)
+      state.categorias = data.results
+      console.log('Categorias:', categorias.value)
+    } catch (error) {
+      console.error('Erro ao buscar categorias:', error)
     }
   }
 
-  return { categorias, getAllCategorias, createCategoria, deleteCategoria, updateCategoria, Listacategorias, getAllListaCategorias } 
+  const createCategoria = async (categoriaData) => { 
+    try {
+      const data = await CategoriaService.createCategoria(categoriaData)
+      state.categorias.push(data)
+    } catch (error) {
+      console.error('Erro ao criar categoria:', error)
+    }
+  }
+
+  const deleteCategoria = async (id) => { 
+    try {
+      await CategoriaService.deleteCategoria(id)
+      state.categorias = state.categorias.filter((categoria) => categoria.id !== id) 
+    } catch (error) {
+      console.error('Erro ao deletar categoria:', error)
+    }
+  }
+
+  const updateCategoria = async (id, categoriaData) => { 
+    try {
+      const updatedCategoria = await CategoriaService.updateCategoria(id, categoriaData)
+      const index = state.categorias.findIndex((categoria) => categoria.id === id) 
+      if (index !== -1) {
+        state.categorias[index] = updatedCategoria
+      }
+    } catch (error) {
+      console.error('Erro ao atualizar categoria:', error)
+    }
+  }
+
+  return { categorias, getAllCategorias, createCategoria, deleteCategoria, updateCategoria } 
 })

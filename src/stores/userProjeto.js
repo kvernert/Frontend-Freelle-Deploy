@@ -11,7 +11,7 @@ export const useUserProjetosStore = defineStore('userProjeto', () => {
 
   const getAllUserProjetos = async () => {
     const data = await UserProjetoService.getAllUserProjetos();
-    state.userProjetos = data;
+    state.userProjetos = data.results;
   };
 
   const createUserProjeto = async (userProjetoData) => {
