@@ -10,10 +10,10 @@ export const useUserStore = defineStore('user', () => {
   const users = computed(() => state.users);
 
   const getAllUsers = async () => {
-    const data = await userservice.getAllUsers();
+    const data = await UserService.getAllUsers();
     state.users = data.results;
   };
 
 
-  return { favoritos, getAllFavoritos };
+  return { users, getAllUsers };
 });
