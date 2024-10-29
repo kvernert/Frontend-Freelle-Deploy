@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { computed, reactive } from 'vue';
-import FavoritoService from '@/services/favoritos';
+import FavoritoService from '@/services/favorito';
 
 export const useFavoritosStore = defineStore('favorito', () => {
   const state = reactive({
