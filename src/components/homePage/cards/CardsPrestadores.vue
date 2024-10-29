@@ -1,44 +1,19 @@
 <script setup>
-const providers = [
-  {
-    name: 'Gabriel Lima',
-    role: 'Programador',
-    username: '@GabrielLima2803',
-    rating: 5.0,
-    image: 'https://avatars.githubusercontent.com/u/106837380?v=4',
-    social: {
-      linkedin: 'https://github.com/GabrielLima2803',
-      instagram: 'https://www.instagram.com/_.lima1/',
-    }
-  },
-  {
-    name: 'Ana Clara',
-    role: 'Programador',
-    username: '@anaclarag',
-    rating: 5.0,
-    image: 'https://avatars.githubusercontent.com/u/106837380?v=4',
-    social: {
-      linkedin: 'https://github.com/GabrielLima2803',
-      instagram: 'https://www.instagram.com/_.lima1/',
-    }
-  },
-  {
-    name: 'Vitor Mendes',
-    role: 'Programador',
-    username: '@vitorms',
-    rating: 5.0,
-    image: 'https://avatars.githubusercontent.com/u/106837380?v=4',
-    social: {
-      linkedin: 'https://github.com/GabrielLima2803',
-      instagram: 'https://www.instagram.com/_.lima1/',
-    }
-  }
-];
+import { onMounted, computed } from 'vue';
+import { useUserStore } from '@/stores/user';
+
+const userStore = useUserStore();
+
+onMounted(async () => {
+  await userStore.getAllUsers();
+});
+
+const providers = computed(() => userStore.UsersLimeted); 
 </script>
 
 <template>
   <div class="provider-section">
-    <h2>Nossos Prestadores</h2>
+    <h2>Nossos Prestadores</h2> 
     <div class="provider-container">
       <div v-for="(provider, index) in providers" :key="index" class="provider-card">
         <div class="provider-left">
@@ -47,12 +22,12 @@ const providers = [
         <div class="provider-right">
           <div class="provider-info">
             <h3>
-              Prestador Pro | {{ provider.role }}
+              Prestador Pro | {{ provider.especializacao }}
               <span class="verified-badge"><i class="mdi mdi-checkbox-marked-circle-outline"></i></span>
             </h3>
             <p>{{ provider.name }}</p>
-            <p>{{ provider.username }}</p>
-            <p><i class="mdi mdi-star"></i>{{ provider.rating.toFixed(1) }}</p>
+            <p>@{{ provider.username }}</p>
+            <!-- <p><i class="mdi mdi-star"></i>{{ provider.rating.toFixed(1) }}</p> -->
           </div>
           <div class="provider-actions">
             <button class="btn">
@@ -64,10 +39,10 @@ const providers = [
             <button class="btn">Ver Perfil</button>
           </div>
           <div class="provider-social">
-            <a :href="provider.social.linkedin" target="_blank">
+            <a :href="provider.linkedin" target="_blank">
               <i class="mdi mdi-linkedin"></i>
             </a>
-            <a :href="provider.social.instagram" target="_blank">
+            <a :href="provider.instagram" target="_blank">
               <i class="mdi mdi-instagram"></i>
             </a>
           </div>
@@ -76,6 +51,7 @@ const providers = [
     </div>
   </div>
 </template>
+
 
 <style scoped>
 .provider-section {
