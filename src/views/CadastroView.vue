@@ -30,7 +30,7 @@ onMounted(() => {
           <!-- "Olá!" alinhado à esquerda -->
           <h4 class="TextLeft">Olá!</h4>
           <!-- Texto "Para continuar, digite seu e-mail" alinhado à esquerda -->
-          <p class="FormPLeft">Para continuar, digite seu e-mail</p>
+          <p class="FormPLeft">Faça o seu cadastro por aqui!</p>
 
           <div class="input-container">
             <input
@@ -38,7 +38,15 @@ onMounted(() => {
               id="username"
               class="inputForm"
             />
-            <label for="username" class="labelForm">E-mail</label>
+            <label for="username" class="labelForm">Digite seu nome...</label>
+          </div>
+          <div class="input-container">
+            <input
+              type="email"
+              id="email"
+              class="marginForm inputForm"
+            />
+            <label for="email" class="labelForm">Digite seu email...</label>
           </div>
           <div class="input-container">
             <input
@@ -46,15 +54,19 @@ onMounted(() => {
               id="password"
               class="marginForm inputForm"
             />
-            <label for="password" class="labelForm">Senha</label>
+            <label for="password" class="labelForm">Crie sua senha...</label>
+          </div>
+          <div class="input-container">
+            <input
+              type="password"
+              id="password"
+              class="marginForm inputForm"
+            />
+            <label for="password" class="labelForm">Confirme sua senha...</label>
           </div>
 
-          <button type="button" style="margin-top: 10px" class="btnSenha">
-            <router-link to="/recuperacao" class="btnSenha">Esqueci minha senha</router-link>
-          </button>
-          <button type="submit" class="btnLogin mt-3">Entrar</button>
-          <router-link to="/cadastro">
-            <button type="button" class="btnCriar mt-3">Criar conta</button>
+          <router-link to="/cadastro" >
+            <button type="button" style="margin-top: 30px" class="btnCriar mt-3">Criar conta</button>
           </router-link>
           <p class="mt-4 FormP Pf">Protegido por reCAPTCHA - Privacidade | Condições</p>
         </form>

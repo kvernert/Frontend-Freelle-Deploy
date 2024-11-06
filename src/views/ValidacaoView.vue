@@ -28,17 +28,19 @@ onMounted(() => {
       <div class="FormBot">
         <form @submit.prevent="login" class="wrapForm">
           <!-- "Olá!" alinhado à esquerda -->
-          <h4 class="TextLeft">Olá!</h4>
+          <h4 class="Text">Digite o Código</h4>
           <!-- Texto "Para continuar, digite seu e-mail" alinhado à esquerda -->
-          <p class="FormPLeft">Para continuar, digite seu e-mail</p>
 
+
+
+            
           <div class="input-container">
             <input
               type="text"
               id="username"
               class="inputForm"
             />
-            <label for="username" class="labelForm">E-mail</label>
+            <label for="password" class="labelForm">Crie sua nova senha...</label>
           </div>
           <div class="input-container">
             <input
@@ -46,16 +48,12 @@ onMounted(() => {
               id="password"
               class="marginForm inputForm"
             />
-            <label for="password" class="labelForm">Senha</label>
+            <label for="password" class="labelForm">Confirme sua nova senha...</label>
           </div>
 
-          <button type="button" style="margin-top: 10px" class="btnSenha">
-            <router-link to="/recuperacao" class="btnSenha">Esqueci minha senha</router-link>
-          </button>
-          <button type="submit" class="btnLogin mt-3">Entrar</button>
-          <router-link to="/cadastro">
-            <button type="button" class="btnCriar mt-3">Criar conta</button>
-          </router-link>
+          
+          <button type="submit" class="btnLogin mt-3">Atualizar</button>
+         
           <p class="mt-4 FormP Pf">Protegido por reCAPTCHA - Privacidade | Condições</p>
         </form>
       </div>

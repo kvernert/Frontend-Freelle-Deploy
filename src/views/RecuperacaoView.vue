@@ -30,31 +30,20 @@ onMounted(() => {
           <!-- "Olá!" alinhado à esquerda -->
           <h4 class="TextLeft">Olá!</h4>
           <!-- Texto "Para continuar, digite seu e-mail" alinhado à esquerda -->
-          <p class="FormPLeft">Para continuar, digite seu e-mail</p>
+          <p class="FormPLeft">Para receber o código, digite seu e-mail</p>
 
           <div class="input-container">
-            <input
-              type="text"
-              id="username"
-              class="inputForm"
-            />
-            <label for="username" class="labelForm">E-mail</label>
-          </div>
-          <div class="input-container">
+             
             <input
               type="password"
               id="password"
               class="marginForm inputForm"
             />
-            <label for="password" class="labelForm">Senha</label>
+            <label for="email" class="labelForm">Digite seu email</label>
           </div>
 
-          <button type="button" style="margin-top: 10px" class="btnSenha">
-            <router-link to="/recuperacao" class="btnSenha">Esqueci minha senha</router-link>
-          </button>
-          <button type="submit" class="btnLogin mt-3">Entrar</button>
-          <router-link to="/cadastro">
-            <button type="button" class="btnCriar mt-3">Criar conta</button>
+          <router-link to="/">
+            <button type="button" class="btnCriar mt-3">Enviar Código</button>
           </router-link>
           <p class="mt-4 FormP Pf">Protegido por reCAPTCHA - Privacidade | Condições</p>
         </form>
