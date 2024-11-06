@@ -104,7 +104,7 @@ onBeforeUnmount(() => {
 
 .cards {
   display: flex;
-  gap: 10px; 
+  gap: 20px; 
 }
 
 .card {

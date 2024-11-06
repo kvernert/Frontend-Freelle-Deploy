@@ -10,6 +10,7 @@ import CarouselOne from "@/components/homePage/cards/CarouselOne.vue";
 import CardsFeitos from "@/components/homePage/cards/CardsFeitos.vue";
 import ContentMainService from "./ServicePage/ContentMainService.vue";
 import LoadingPage from "./MainComponents/loading/LoadingPage.vue";
+import ContentMainJob from "./jobPage/ContentMainJob.vue";
 
 export {
     FooterComponent,
@@ -23,5 +24,6 @@ export {
     CarouselOne,
     CardsFeitos,
     ContentMainService,
-    LoadingPage
+    LoadingPage,
+    ContentMainJob
 };
