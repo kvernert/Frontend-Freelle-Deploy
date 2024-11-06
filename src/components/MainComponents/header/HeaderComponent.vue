@@ -10,7 +10,7 @@
             <div class="header-right">
                 <button class="btn">Português</button>
                 <router-link to="/login" class="btn">Entrar</router-link>
-                <button class="btn btn-i">Inscrição</button>
+                <router-link to="/" class="btn btn-i">Inscrição</router-link>
             </div>
         </div>
     </div>
