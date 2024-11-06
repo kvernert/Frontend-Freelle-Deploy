@@ -7,6 +7,7 @@ import UpdateProfile from '@/components/ProfilePage/UpdateProfile.vue';
 import CadastroUsuario from '@/components/auth/CadastroUsuario.vue';
 import RecuperacaoSenha from '@/components/auth/RecuperacaoSenha.vue';
 import ValidacaoSenha from '@/components/auth/ValidacaoSenha.vue';
+import AdicaoProjeto from '@/components/ProjectAdd/AdicaoProjeto.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -53,6 +54,11 @@ const router = createRouter({
       name: 'Update',
       component: UpdateProfile,
      },
+     {
+      path: '/adicao',
+      name: 'ProjetoAdicao',
+      component: AdicaoProjeto,
+     }
   ],
 });
 
