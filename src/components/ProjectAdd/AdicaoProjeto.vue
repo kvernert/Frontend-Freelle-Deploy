@@ -24,38 +24,47 @@ onMounted(() => {
     <img src="https://i.ibb.co/1KNDQpw/Freelee-icon.png" alt="Logo" class="logo-top" />
 
     <div class="containerPrincipal">
-      <p class="update-text">Precisa atualizar seu perfil? <a href="#">Vá para o meu perfil</a></p>
+      <p class="update-text">Precisa criar um projeto? <a href="#">Ir para os meus projetos</a></p>
 
-      <div class="profile-form-container">
-        <div class="profile-section">
-          <img src="/Profile.png" alt="Profile Picture" class="profile-img">
-          <div class="story-container">
-            <p class="story-text">Conte um pouco da sua história...</p>
-          </div>
+      <div class="project-form-container">
+        <div class="project-image">
+          <p>Imagem do projeto +</p>
         </div>
 
-        <form @submit.prevent="login" class="wrapForm">
+        <form @submit.prevent="submitProject" class="wrapForm">
           <div class="input-container">
-            <label for="name">Nome Completo</label>
-            <input type="text" id="name" class="inputForm" placeholder="Digite seu nome..." />
+            <label for="title">Título</label>
+            <input type="text" id="title" class="inputForm" placeholder="Digite seu título..." />
           </div>
 
           <div class="input-container">
-            <label for="email">Email</label>
-            <input type="email" id="email" class="inputForm" placeholder="Digite seu email..." />
+            <label for="description">Descrição</label>
+            <input type="text" id="description" class="inputForm" placeholder="Descreva seu projeto..." />
           </div>
 
           <div class="input-container">
-            <label for="area">Área de atuação</label>
-            <input type="text" id="area" class="inputForm" placeholder="Informe sua área de atuação..." />
+            <label for="payment">Pagamento</label>
+            <input type="text" id="payment" class="inputForm" placeholder="ex: 1.200..." />
+          </div>
+
+          <div class="input-container
+">
+            <label for="deadline">Data Limite</label>
+            <input type="date" id="deadline" class="inputForm" />
           </div>
 
           <div class="input-container">
-            <label for="education">Formação</label>
-            <input type="text" id="education" class="inputForm" placeholder="Digite sua formação..." />
+            <label for="category">Categoria</label>
+            <select id="category" class="inputForm">
+              <option value="">Selecione a categoria...</option>
+              <option value="design">Design</option>
+              <option value="desenvolvimento">Desenvolvimento</option>
+              <option value="marketing">Marketing</option>
+              <!-- Adicione outras opções de categoria conforme necessário -->
+            </select>
           </div>
 
-          <button type="submit" class="btn-submit">CONFIRMAR ALTERAÇÕES</button>
+          <button type="submit" class="btn-submit">ADICIONAR PROJETO</button>
         </form>
       </div>
 
@@ -96,12 +105,13 @@ body {
 
 .containerPrincipal {
   width: 80%;
-  max-width: 800px;
+  max-width: 1000px;
   background-color: white;
-  padding: 40px;
+  padding: 50px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
+ 
   align-items: center;
   text-align: center;
 }
@@ -118,46 +128,26 @@ body {
   font-weight: bold;
 }
 
-.profile-form-container {
+.project-form-container {
   display: flex;
   gap: 20px;
   width: 100%;
   justify-content: space-between;
 }
 
-.profile-section {
+.project-image {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  width: 30%;
-}
-
-.profile-img {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 10px;
-  border: 2px solid #ccc;
-}
-
-.story-container {
-  background-color: #f7f7f7;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 10px;
-  width: 100%;
-  text-align: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.story-text {
-  font-size: 12px;
+  justify-content: center;
+  width: 40%;
+  height: 200px;
+  border: 1px dashed #ccc;
   color: #666;
+  font-size: 14px;
 }
 
 .wrapForm {
-  width: 65%;
+  width: 55%;
   display: flex;
   flex-direction: column;
 }
@@ -182,12 +172,10 @@ body {
   border-color: #006B63;
 }
 
-
 .btn-submit {
-  width: 100%; /* Ajustado para ocupar 80% do container para destacar o botão */
-  max-width: 400px; /* Limite de largura para telas maiores */
+  width: 100%;
   padding: 15px;
-  margin: 25px auto; /* Centralizado horizontalmente */
+  margin-top: 25px;
   background-color: #006B63;
   color: white;
   font-size: 16px;
@@ -201,6 +189,7 @@ body {
 .btn-submit:hover {
   background-color: #003F3A;
 }
+
 .privacy {
   font-size: 12px;
   color: #666;
@@ -223,7 +212,7 @@ body {
     padding: 20px;
   }
 
-  .profile-form-container {
+  .project-form-container {
     flex-direction: column;
     align-items: center;
   }

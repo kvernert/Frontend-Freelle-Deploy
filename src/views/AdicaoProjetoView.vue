@@ -1,10 +1,10 @@
 <script setup>
-import { UpdateProfile } from "@/components";
+import { AdicaoProjeto } from "@/components";
 </script>
 
 <template>
   <RouterView/>
-  <UpdateProfile/>
+  <AdicaoProjeto/>
 </template>
 
 <style scoped></style>
