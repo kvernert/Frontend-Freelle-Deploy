@@ -54,7 +54,7 @@ const router = createRouter({
       path: '/update',
       name: 'Update',
       component: UpdateProfile
-    }
+    },
     {
       path: '/job-page',
       name: 'Job',
