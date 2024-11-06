@@ -50,12 +50,12 @@ const router = createRouter({
       component: ValidacaoSenha
     },
     {
-      path: '/update',
+      path: '/update-profile',
       name: 'Update',
       component: UpdateProfile,
      },
      {
-      path: '/adicao',
+      path: '/adicao-job',
       name: 'ProjetoAdicao',
       component: AdicaoProjeto,
      }

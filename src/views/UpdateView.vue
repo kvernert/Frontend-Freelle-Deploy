@@ -5,8 +5,6 @@ import { UpdateProfile } from "@/components";
 <template>
   <RouterView/>
   <UpdateProfile/>
-  
-
 </template>
 
 <style scoped></style>

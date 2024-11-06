@@ -5,8 +5,6 @@ import { RecuperacaoSenha } from "@/components";
 <template>
   <RouterView/>
   <RecuperacaoSenha/>
-  
-
 </template>
 
 <style scoped></style>

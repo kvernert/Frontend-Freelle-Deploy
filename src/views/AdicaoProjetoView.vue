@@ -5,8 +5,6 @@ import { AdicaoProjeto } from "@/components";
 <template>
   <RouterView/>
   <AdicaoProjeto/>
-  
-
 </template>
 
 <style scoped></style>
