@@ -1,176 +1,255 @@
-  <script>
-  export default {
-    name: "ProviderProfile",
-    data() {
-      return {
-        provider: {
-          name: "Heloisa Lopes",
-          username: "@heloisa-lopes",
-          location: "Brasil",
-          language: "Fala Português",
-          rating: 5.0,
-          reviews: "14.0k",
-          totalOrders: "29.2",
-          yearsInPlatform: 3,
-          expertise: "Design de Logotipo",
-          about:
-            "Olá, meu nome é Álpa. Além de designer gráfica e empresária, adoro desenhar, o que estimula minha criatividade e me ajuda a relaxar. Também gosto de andar de bicicleta, pois me mantém saudável e em forma. Forneço uma variedade de serviços, incluindo design de logotipo minimalista, animação, guias de estilo de marca, desenvolvimento web e design de papelaria. Vamos dar as mãos e transformar seu negócio em uma marca reconhecível! Contate-me agora!",
-          image: "https://avatars.githubusercontent.com/u/106837380?v=4",
-        },
-      };
-    },
-  };
-  </script>
+<script>
+export default {
+  name: "ProviderProfile",
+  data() {
+    return {
+      provider: {
+        name: "Heloisa Lopes",
+        username: "@heloisa-lopes",
+        location: "Brasil",
+        language: "Fala Português",
+        rating: 5.0,
+        reviews: "14.0k",
+        totalOrders: "29.2",
+        yearsInPlatform: 3,
+        expertise: "Design de Logotipo",
+        about:
+          "Olá, meu nome é Álpa. Além de designer gráfica e empresária, adoro desenhar, o que estimula minha criatividade e me ajuda a relaxar. Também gosto de andar de bicicleta, pois me mantém saudável e em forma. Forneço uma variedade de serviços, incluindo design de logotipo minimalista, animação, guias de estilo de marca, desenvolvimento web e design de papelaria. Vamos dar as mãos e transformar seu negócio em uma marca reconhecível! Contate-me agora!",
+        image: "https://avatars.githubusercontent.com/u/106837380?v=4",
+      },
+    };
+  }
+}
+</script>
+
 <template>
-    <div class="profile-container">
-      <div class="profile-left">
+  <div class="profile-container">
+    <!-- Left side with profile details -->
+    <div class="profile-left">
+      <div class="profile-header">
         <img :src="provider.image" alt="Profile Image" class="profile-image" />
-        <h1>{{ provider.name }} <span class="username">{{ provider.username }}</span></h1>
-        <p class="location">
-          <i class="mdi mdi-map-marker"></i> {{ provider.location }} 
-          <i class="mdi mdi-translate"></i> {{ provider.language }}
-        </p>
-  
+        <div class="profile-info">
+          <h1>{{ provider.name }} <span class="username">{{ provider.username }}</span> <i class="mdi mdi-check-decagram verified-icon"></i></h1>
+          <p class="location">
+            <i class="mdi mdi-map-marker"></i> {{ provider.location }} 
+            </p>
+            <p class="location">
+            <i class="mdi mdi-translate"></i> {{ provider.language }}
+          </p>
+        </div>
+      </div>
+
+      <div class="profile-details">
         <div class="ratings">
           <div class="rating">
-            <i class="mdi mdi-star"></i> {{ provider.rating.toFixed(1) }}
-            <span>{{ provider.reviews }} avaliações</span>
+            <span>★★★★★</span> {{ provider.rating.toFixed(1) }}
+            <span class="review-count">{{ provider.reviews }} avaliações</span>
           </div>
+          <div class="divider"></div>
           <div class="orders">
-            <span>{{ provider.totalOrders }}K</span> Total de Pedidos
+            <span>{{ provider.totalOrders }}</span> <span class="detail-label">Total de Pedidos</span>
           </div>
+          <div class="divider"></div>
           <div class="years">
-            <span>{{ provider.yearsInPlatform }}</span> anos Na Freelle
+            <span>{{ provider.yearsInPlatform }} anos</span> <span class="detail-label">Na Freelle</span>
           </div>
         </div>
-  
+
         <div class="expertise">
           <h3>Expert em:</h3>
           <p><i class="mdi mdi-palette"></i> {{ provider.expertise }}</p>
         </div>
-  
-        <div class="about-section">
-          <h3>Sobre</h3>
-          <p>{{ provider.about }}</p>
-        </div>
-      </div>
-  
-      <div class="profile-right">
-        <div class="contact-card">
-          <h2>{{ provider.name }}</h2>
-          <p class="username">{{ provider.username }}</p>
-          <button class="contact-btn">
-            <i class="mdi mdi-send"></i> Entrar em Contato
-          </button>
-        </div>
       </div>
     </div>
-  </template>
-  
-  
-  <style scoped>
-  .profile-container {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    font-family: 'Arial', sans-serif;
-  }
-  
-  .profile-left {
-    width: 65%;
-  }
-  
-  .profile-right {
-    width: 30%;
-  }
-  
-  .profile-image {
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    margin-bottom: 10px;
-  }
-  
-  h1 {
-    font-size: 24px;
-    font-weight: bold;
-    margin: 10px 0;
-  }
-  
-  .username {
-    color: #666;
-    font-size: 14px;
-  }
-  
-  .location {
-    color: #333;
-    margin: 5px 0;
-    font-size: 14px;
-  }
-  
-  .ratings {
-    display: flex;
-    gap: 20px;
-    margin-top: 10px;
-    font-size: 14px;
-  }
-  
-  .rating, .orders, .years {
-    display: flex;
-    align-items: center;
-  }
-  
-  .expertise {
-    margin-top: 20px;
-  }
-  
-  .expertise h3 {
-    font-weight: bold;
-  }
-  
-  .about-section {
-    margin-top: 20px;
-  }
-  
-  .about-section h3 {
-    font-weight: bold;
-  }
-  
-  .contact-card {
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    padding: 15px;
-    text-align: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .contact-card h2 {
-    font-size: 18px;
-  }
-  
-  .contact-card .username {
-    color: #666;
-    font-size: 14px;
-    margin-bottom: 10px;
-  }
-  
-  .contact-btn {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 14px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-  }
-  
-  .contact-btn i {
-    font-size: 16px;
-  }
-  </style>
-  
+
+    <!-- Right side with contact card -->
+    <div class="contact-card">
+      <button class="favorite-btn">
+        <i class="mdi mdi-heart-outline"></i>
+      </button>
+      <div class="contact-content">
+        <h2 class="contact-name">{{ provider.name }}</h2>
+        <p class="username">{{ provider.username }}</p>
+      </div>
+      <button class="contact-btn">
+        <i class="mdi mdi-send"></i> Entrar em Contato
+      </button>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.profile-container {
+  display: flex;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+.profile-left {
+  width: 100%;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.profile-image {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.profile-info h1 {
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.username {
+  color: #666;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.verified-icon {
+  color: #000;
+  font-size: 18px;
+  margin-left: 5px;
+}
+
+.location {
+  color: #333;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.profile-details {
+  margin-top: 20px;
+}
+
+.ratings {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  margin-top: 15px;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.review-count {
+  color: #666;
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+.divider {
+  width: 1px;
+  height: 20px;
+  background-color: #ddd;
+  margin: 0 15px;
+}
+
+.orders, .years {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.detail-label {
+  color: #666;
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+.expertise {
+  margin-top: 25px;
+  font-size: 18px;
+}
+
+.expertise i {
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 400px;
+  height: 200px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  position: relative;
+}
+
+.favorite-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #666;
+  cursor: pointer;
+}
+
+.favorite-btn:hover {
+  color: #006B63;
+}
+
+.contact-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 10px;
+}
+
+.contact-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.contact-card .username {
+  font-size: 14px;
+  color: #666;
+}
+
+.contact-btn {
+  align-self: stretch;
+  margin-top: 30px;
+  background-color: transparent;
+  color: black;
+  border: 1px solid black;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.contact-btn i {
+  font-size: 16px;
+}
+
+.contact-btn:hover {
+  background-color: #f0f0f0;
+}
+</style>
