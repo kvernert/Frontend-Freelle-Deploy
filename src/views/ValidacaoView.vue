@@ -1,5 +1,6 @@
+
 <script setup>
-import { FooterComponent, HeaderComponent, HeaderSmall, FooterSmall } from "@/components";
+import { HeaderComponent, HeaderSmall } from "@/components";
 import { ref, onMounted } from 'vue';
 
 const isSmallScreen = ref(false);
@@ -12,6 +13,15 @@ onMounted(() => {
   checkScreenSize();
   window.addEventListener('resize', checkScreenSize);
 });
+
+const moveFocus = (event, currentIndex) => {
+  const inputs = document.querySelectorAll('.code-input');
+  if (event.target.value !== "" && currentIndex < inputs.length - 1) {
+    inputs[currentIndex + 1].focus();
+  } else if (event.target.value === "" && currentIndex > 0) {
+    inputs[currentIndex - 1].focus();
+  }
+};
 </script>
 
 <template>
@@ -27,10 +37,29 @@ onMounted(() => {
     <div class="containerPrincipal">
       <div class="FormBot">
         <form @submit.prevent="login" class="wrapForm">
-          <!-- "Olá!" alinhado à esquerda -->
-          <h4 class="TextLeft">Olá!</h4>
-          <!-- Texto "Para continuar, digite seu e-mail" alinhado à esquerda -->
-          <p class="FormPLeft">Para continuar, digite seu e-mail</p>
+          <h4 class="Text">Digite o Código</h4>
+          <div class="code-container mt-3">
+            <!-- Primeiro grupo de três inputs -->
+            <input
+              v-for="(input, index) in 3"
+              :key="index"
+              type="text"
+              maxlength="1"
+              class="code-input"
+              @input="moveFocus($event, index)"
+            />
+            <!-- Traço separador -->
+            <span class="separator">-</span>
+            <!-- Segundo grupo de três inputs -->
+            <input
+              v-for="(input, index) in 3"
+              :key="index + 3"
+              type="text"
+              maxlength="1"
+              class="code-input"
+              @input="moveFocus($event, index + 3)"
+            />
+          </div>
 
           <div class="input-container">
             <input
@@ -38,7 +67,7 @@ onMounted(() => {
               id="username"
               class="inputForm"
             />
-            <label for="username" class="labelForm">E-mail</label>
+            <label for="password" class="labelForm">Crie sua nova senha...</label>
           </div>
           <div class="input-container">
             <input
@@ -46,27 +75,15 @@ onMounted(() => {
               id="password"
               class="marginForm inputForm"
             />
-            <label for="password" class="labelForm">Senha</label>
+            <label for="password" class="labelForm">Confirme sua nova senha...</label>
           </div>
 
-          <button type="button" style="margin-top: 10px" class="btnSenha">
-            <router-link to="/recuperacao" class="btnSenha">Esqueci minha senha</router-link>
-          </button>
-          <button type="submit" class="btnLogin mt-3">Entrar</button>
-          <router-link to="/cadastro">
-            <button type="button" class="btnCriar mt-3">Criar conta</button>
-          </router-link>
+          <button type="submit" class="btnAtualizar mt-3">Atualizar</button>
           <p class="mt-4 FormP Pf">Protegido por reCAPTCHA - Privacidade | Condições</p>
         </form>
       </div>
     </div>
   </div>
-<div class="footer">
-  <!-- Footer Grande (escondido em telas pequenas) -->
-  <footer-component v-if="!isSmallScreen" />
-  <!-- Footer Pequeno (exibido apenas em telas pequenas) -->
-  <footer-small v-if="isSmallScreen" />
-</div>
 </template>
 
 <style scoped>
@@ -89,6 +106,7 @@ onMounted(() => {
   width: 100%;
   min-height: 100vh;
   background: #006B63;
+  
 }
 
 .containerPrincipal {
@@ -97,7 +115,7 @@ onMounted(() => {
   padding: 40px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
-  text-align: center; /* Mantém o restante do formulário centralizado */
+  text-align: center;
 }
 
 .logo-top {
@@ -105,18 +123,10 @@ onMounted(() => {
   margin-bottom: 20px;
 }
 
-.TextLeft {
-  font-size: bold;
-  text-align: left; /* Alinha o texto "Olá!" à esquerda */
-}
-
-.FormPLeft {
-  text-align: left; /* Alinha o texto "Para continuar, digite seu e-mail" à esquerda */
-}
-
 .input-container {
   position: relative;
-  margin-top: 30px;
+  margin-top: 28px;
+
 }
 
 .inputForm {
@@ -126,6 +136,7 @@ onMounted(() => {
   border: 1px solid #006B63;
   outline: none;
   transition: all 0.3s;
+  
 }
 
 .inputForm:focus + .labelForm {
@@ -142,12 +153,10 @@ onMounted(() => {
   pointer-events: none;
 }
 
-.labelForm.active {
-  top: -10px;
-  font-size: 12px;
-}
-
-.btnLogin, .btnCriar {
+.btnAtualizar {
+  background-color: #006B63;
+  color: white;
+  border: none;
   width: 100%;
   height: 45px;
   margin-top: 15px;
@@ -155,46 +164,38 @@ onMounted(() => {
   font-weight: bold;
 }
 
-.btnLogin {
-  background-color: #006B63;
-  color: white;
-  border: none;
-}
-
-.btnCriar {
-  background-color: white;
-  border: 2px solid #006B63;
-  color: #006B63;
-  transition: all 0.3s ease; /* Transição para o hover */
-}
-
-.btnCriar:hover {
-  background-color: #006B63; /* Cor de fundo no hover */
-  color: white; /* Cor do texto no hover */
-}
-
-.btnSenha {
-  margin-top: 20px;
-  border: none;
-  border-bottom: solid 1px #006B63;
-  background-color: white;
-  color: gray;
-  font-size: 15px;
-  text-decoration: none;
-}
-
-.btnSenha:hover {
-  color: #006B63;
-  transition: 0.7s;
-}
-
 .Pf {
   font-size: 12px;
   margin-top: 30px;
 }
 
-.footer {
-  background: #006B63;
+/* Estilos para os quadrados do código */
+.code-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.code-input {
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  text-align: center;
+  border: 1px solid #006B63;
+  border-radius: 5px;
+  outline: none;
+}
+
+.code-input:focus {
+  border-color: #000;
+}
+
+.separator {
+  font-size: 24px;
+  font-weight: bold;
+  color: #006B63;
 }
 
 /* Estilos para telas pequenas */
@@ -210,7 +211,7 @@ onMounted(() => {
   }
 
   .logo {
-    width: 140px; /* Diminui mais o tamanho da logo em telas pequenas */
+    width: 140px;
   }
 }
 
@@ -230,4 +231,4 @@ onMounted(() => {
     font-size: 14px;
   }
 }
-</style>limpe o codigo
+</style>
