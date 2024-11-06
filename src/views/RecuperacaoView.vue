@@ -1,5 +1,5 @@
 <script setup>
-import { FooterComponent, HeaderComponent, HeaderSmall, FooterSmall } from "@/components";
+import { HeaderComponent, HeaderSmall, } from "@/components";
 import { ref, onMounted } from 'vue';
 
 const isSmallScreen = ref(false);
@@ -12,6 +12,8 @@ onMounted(() => {
   checkScreenSize();
   window.addEventListener('resize', checkScreenSize);
 });
+
+
 </script>
 
 <template>
@@ -22,51 +24,33 @@ onMounted(() => {
 
   <div class="wrapContainer">
     <div class="FormTop">
-      <img src="https://i.ibb.co/1KNDQpw/Freelee-icon.png" alt="Logo" class="logo-top" />
+      <img src="https://i.ibb.co/1KNDQpw/Freelee-icon.png" alt="Logo" class="logo" />
     </div>
     <div class="containerPrincipal">
       <div class="FormBot">
         <form @submit.prevent="login" class="wrapForm">
           <!-- "Olá!" alinhado à esquerda -->
-          <h4 class="TextLeft">Olá!</h4>
-          <!-- Texto "Para continuar, digite seu e-mail" alinhado à esquerda -->
-          <p class="FormPLeft">Para continuar, digite seu e-mail</p>
+          <h4 class="Text">Esqueceu sua senha?</h4>
 
           <div class="input-container">
-            <input
-              type="text"
-              id="username"
-              class="inputForm"
-            />
-            <label for="username" class="labelForm">E-mail</label>
-          </div>
-          <div class="input-container">
+             
             <input
               type="password"
               id="password"
               class="marginForm inputForm"
             />
-            <label for="password" class="labelForm">Senha</label>
+            <label for="email" class="labelForm">Digite seu email</label>
           </div>
 
-          <button type="button" style="margin-top: 10px" class="btnSenha">
-            <router-link to="/recuperacao" class="btnSenha">Esqueci minha senha</router-link>
-          </button>
-          <button type="submit" class="btnLogin mt-3">Entrar</button>
-          <router-link to="/cadastro">
-            <button type="button" class="btnCriar mt-3">Criar conta</button>
+          <router-link to="/">
+            <button type="button" class="btnCriar mt-3">Enviar Código</button>
           </router-link>
           <p class="mt-4 FormP Pf">Protegido por reCAPTCHA - Privacidade | Condições</p>
         </form>
       </div>
     </div>
   </div>
-<div class="footer">
-  <!-- Footer Grande (escondido em telas pequenas) -->
-  <footer-component v-if="!isSmallScreen" />
-  <!-- Footer Pequeno (exibido apenas em telas pequenas) -->
-  <footer-small v-if="isSmallScreen" />
-</div>
+
 </template>
 
 <style scoped>
@@ -98,16 +82,20 @@ onMounted(() => {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
   text-align: center; /* Mantém o restante do formulário centralizado */
+  
 }
 
-.logo-top {
+.logo {
   width: 80px;
-  margin-bottom: 20px;
 }
 
 .TextLeft {
   font-size: bold;
   text-align: left; /* Alinha o texto "Olá!" à esquerda */
+}
+
+.Text {
+  font-size: 18px; /* Ajuste o tamanho conforme necessário */
 }
 
 .FormPLeft {
@@ -147,10 +135,10 @@ onMounted(() => {
   font-size: 12px;
 }
 
-.btnLogin, .btnCriar {
+.btnCriar {
   width: 100%;
   height: 45px;
-  margin-top: 15px;
+  margin-top: 18px;
   font-size: 18px;
   font-weight: bold;
 }
@@ -230,4 +218,4 @@ onMounted(() => {
     font-size: 14px;
   }
 }
-</style>limpe o codigo
+</style>
