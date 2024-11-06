@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import AuthService from '@/services/auth';
-import { reactive } from 'vue';
+import { reactive, computed } from 'vue';
 import { useLoadingStore } from '@/stores/loading';
 
 const authService = new AuthService();
@@ -11,6 +11,8 @@ export const useAuthStore = defineStore('auth', () => {
   });
 
   const loadingStore = useLoadingStore();
+
+  const isLogged = computed(() => !!state.token);  
 
   function setToken(newToken) {
     state.token = newToken;
@@ -60,5 +62,5 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  return { state, setToken, LoginUser, LogoutUser, RegisterUser, getUserToken };
+  return { state, setToken, LoginUser, LogoutUser, RegisterUser, getUserToken, isLogged };
 });

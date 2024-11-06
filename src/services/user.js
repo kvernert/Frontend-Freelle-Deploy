@@ -6,10 +6,10 @@ class UserService {
         return response.data;
     }
 
-    async getMeUser(token){
+    async getMeUser(authToken){
         const response = await axios.get('/usuarios/me', {
             headers: {
-              Authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${authToken}`,
             },
           });
           return response.data;
