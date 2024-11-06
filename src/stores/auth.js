@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import AuthService from '@/services/auth';
 import { reactive } from 'vue';
+import { useLoadingStore } from '@/stores/loading';
 
 const authService = new AuthService();
 
@@ -9,19 +10,24 @@ export const useAuthStore = defineStore('auth', () => {
     token: localStorage.getItem('authToken') || null,
   });
 
+  const loadingStore = useLoadingStore();
+
   function setToken(newToken) {
     state.token = newToken;
     localStorage.setItem('authToken', newToken);
   }
 
   async function LoginUser(credentials) {
+    loadingStore.startLoading();
     try {
       const response = await authService.LoginUser(credentials);
-      setToken(response.access); 
+      setToken(response.access);
       return response;
     } catch (error) {
       console.error('Erro no login:', error);
       throw error;
+    } finally {
+      loadingStore.stopLoading();
     }
   }
 
@@ -31,12 +37,15 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function RegisterUser(userData) {
+    loadingStore.startLoading();
     try {
       const response = await authService.RegisterUser(userData);
       return response;
     } catch (error) {
       console.error('Erro no registro:', error);
       throw error;
+    } finally {
+      loadingStore.stopLoading();
     }
   }
 

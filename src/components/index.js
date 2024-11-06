@@ -9,6 +9,7 @@ import CardsPrestadoresSmall from "@/components/homePage/cards/CardsPrestadoresS
 import CarouselOne from "@/components/homePage/cards/CarouselOne.vue";
 import CardsFeitos from "@/components/homePage/cards/CardsFeitos.vue";
 import ContentMainService from "./ServicePage/ContentMainService.vue";
+import LoadingPage from "./MainComponents/loading/LoadingPage.vue";
 
 export {
     FooterComponent,
@@ -21,5 +22,6 @@ export {
     CardsPrestadoresSmall,
     CarouselOne,
     CardsFeitos,
-    ContentMainService
+    ContentMainService,
+    LoadingPage
 };
