@@ -22,48 +22,51 @@ onMounted(() => {
 
   <div class="wrapContainer">
     <img src="https://i.ibb.co/1KNDQpw/Freelee-icon.png" alt="Logo" class="logo-top" />
-    
+
     <div class="containerPrincipal">
       <p class="update-text">Precisa atualizar seu perfil? <a href="#">Vá para o meu perfil</a></p>
 
-      <div class="profile-picture">
-        <!-- Placeholder para a imagem do perfil -->
-        <img src="https://via.placeholder.com/100" alt="Profile Picture" class="profile-img">
-        <p class="picture-text">Escolha uma foto...</p>
+      <div class="profile-form-container">
+        <div class="profile-section">
+          <img src="/Profile.png" alt="Profile Picture" class="profile-img">
+          <div class="story-container">
+            <p class="story-text">Conte um pouco da sua história...</p>
+          </div>
+        </div>
+
+        <form @submit.prevent="login" class="wrapForm">
+          <div class="input-container">
+            <label for="name">Nome Completo</label>
+            <input type="text" id="name" class="inputForm" placeholder="Digite seu nome..." />
+          </div>
+
+          <div class="input-container">
+            <label for="email">Email</label>
+            <input type="email" id="email" class="inputForm" placeholder="Digite seu email..." />
+          </div>
+
+          <div class="input-container">
+            <label for="area">Área de atuação</label>
+            <input type="text" id="area" class="inputForm" placeholder="Informe sua área de atuação..." />
+          </div>
+
+          <div class="input-container">
+            <label for="education">Formação</label>
+            <input type="text" id="education" class="inputForm" placeholder="Digite sua formação..." />
+          </div>
+
+          <button type="submit" class="btn-submit">CONFIRMAR ALTERAÇÕES</button>
+        </form>
       </div>
 
-      <form @submit.prevent="login" class="wrapForm">
-        <div class="input-container">
-          <label for="name">Nome Completo</label>
-          <input type="text" id="name" class="inputForm" placeholder="Digite seu nome..." />
-        </div>
-
-        <div class="input-container">
-          <label for="email">Email</label>
-          <input type="email" id="email" class="inputForm" placeholder="Digite seu email..." />
-        </div>
-
-        <div class="input-container">
-          <label for="area">Área de atuação</label>
-          <input type="text" id="area" class="inputForm" placeholder="Informe sua área de atuação..." />
-        </div>
-
-        <div class="input-container">
-          <label for="education">Formação</label>
-          <input type="text" id="education" class="inputForm" placeholder="Digite sua formação..." />
-        </div>
-
-        <button type="submit" class="btn-submit">Confirmar Alterações</button>
-      </form>
-
-      <p class="FormP Pf">Protegido por reCAPTCHA - Privacidade | Condições</p>    </div>
+      <p class="privacy">Protegido por reCAPTCHA - <a href="#">Privacidade</a> | <a href="#">Condições</a></p>
+    </div>
   </div>
+
   <div class="footer">
-  <!-- Footer Grande (escondido em telas pequenas) -->
-  <footer-component v-if="!isSmallScreen" />
-  <!-- Footer Pequeno (exibido apenas em telas pequenas) -->
-  <footer-small v-if="isSmallScreen" />
-</div>
+    <footer-component v-if="!isSmallScreen" />
+    <footer-small v-if="isSmallScreen" />
+  </div>
 </template>
 
 <style scoped>
@@ -92,10 +95,14 @@ body {
 }
 
 .containerPrincipal {
-  width: 440px;
+  width: 80%;
+  max-width: 800px;
   background-color: white;
   padding: 40px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 
@@ -111,24 +118,48 @@ body {
   font-weight: bold;
 }
 
-.profile-picture {
+.profile-form-container {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.profile-section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 20px;
+  width: 30%;
 }
 
 .profile-img {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 10px;
+  border: 2px solid #ccc;
 }
 
-.picture-text {
+.story-container {
+  background-color: #f7f7f7;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.story-text {
   font-size: 12px;
   color: #666;
+}
+
+.wrapForm {
+  width: 65%;
+  display: flex;
+  flex-direction: column;
 }
 
 .input-container {
@@ -151,44 +182,50 @@ body {
   border-color: #006B63;
 }
 
+
 .btn-submit {
-  width: 100%;
-  padding: 12px;
-  margin-top: 20px;
-  background-color: #006B63;
+  width: 100%; /* Ajustado para ocupar 80% do container para destacar o botão */
+  max-width: 400px; /* Limite de largura para telas maiores */
+  padding: 15px;
+  margin: 25px auto; /* Centralizado horizontalmente */
+  background-color: #004D47;
   color: white;
   font-size: 16px;
   font-weight: bold;
   border: none;
   cursor: pointer;
+  text-transform: uppercase;
   transition: background-color 0.3s;
 }
 
 .btn-submit:hover {
-  background-color: #004D47;
+  background-color: #003F3A;
 }
-
 .privacy {
   font-size: 12px;
   color: #666;
-  margin-top: 20px;
-}
-.footer {
-  background: #006B63;
+  margin-top: 30px;
 }
 
 .privacy a {
   color: #006B63;
   text-decoration: none;
 }
-.Pf {
-  font-size: 12px;
-  margin-top: 30px;
+
+.footer {
+  background: #006B63;
+  width: 100%;
 }
+
 @media (max-width: 768px) {
   .containerPrincipal {
     width: 90%;
     padding: 20px;
+  }
+
+  .profile-form-container {
+    flex-direction: column;
+    align-items: center;
   }
 
   .logo-top {
@@ -197,7 +234,7 @@ body {
 
   .btn-submit {
     font-size: 14px;
-    padding: 10px;
+    padding: 12px;
   }
 }
 </style>
