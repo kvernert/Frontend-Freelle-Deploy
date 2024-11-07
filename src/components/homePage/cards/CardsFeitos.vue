@@ -4,7 +4,7 @@
 <template>
 <div class="card-section">
     <h2>Serviços Populares</h2>
-  <img src="@/assets/img/feitos.png" alt="Feitos no Freelle" />
+  <img src="https://i.ibb.co/phgw2Yc/feitos.png" alt="Feitos no Freelle" />
   </div>
 </template>
 

@@ -11,6 +11,10 @@ import CardsFeitos from "@/components/homePage/cards/CardsFeitos.vue";
 import ContentMainService from "./ServicePage/ContentMainService.vue";
 import LoadingPage from "./MainComponents/loading/LoadingPage.vue";
 import ContentMainJob from "./jobPage/ContentMainJob.vue";
+import HeaderLoggedPage from "./homeLoggedPage/HeaderLoggedPage.vue";
+import ContentLoggedPage from "./homeLoggedPage/ContentLoggedPage.vue";
+import CardJob from "./jobPage/CardJob.vue";
+import CardUser from "./jobPage/CardUser.vue";
 
 export {
     FooterComponent,
@@ -25,5 +29,9 @@ export {
     CardsFeitos,
     ContentMainService,
     LoadingPage,
-    ContentMainJob
+    ContentMainJob,
+    HeaderLoggedPage,
+    ContentLoggedPage,
+    CardJob,
+    CardUser,
 };
