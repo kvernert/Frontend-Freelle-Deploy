@@ -1,24 +1,35 @@
 <script setup>
-import { onMounted } from 'vue'
-import { useProjetosStore } from '@/stores/projeto'  
-import CardUser from './CardUser.vue'
-import CardJob from './CardJob.vue'
-import CardsComponent from '../homePage/cards/CardsComponent.vue'
+import { ref, onMounted, watch } from 'vue';
+import { useRoute } from 'vue-router';
+import { useProjetosStore } from '@/stores/projeto'; 
+import { CardJob, CardUser, CardsComponent } from '@/components';
 
-const projetosStore = useProjetosStore()
+const route = useRoute();
+const categoriaId = ref(route.params.categoriaId);
+const projetosStore = useProjetosStore();
+
+const carregarProjetos = (categoriaId) => {
+  projetosStore.getProjetosPorCategoria(categoriaId); 
+  console.log(projetosStore.projetosPorCategoria);
+}
 
 onMounted(() => {
-  projetosStore.getAllProjetos()
-})
+  carregarProjetos(categoriaId.value);
+});
+
+watch(() => route.params.categoriaId, (novoCategoriaId) => {
+  categoriaId.value = novoCategoriaId;
+  carregarProjetos(novoCategoriaId);  
+});
 </script>
 
 <template>
-    <CardsComponent class="margin-top" />
-    <h1 class="title">Title</h1>
-    <div class="flex">
-        <CardUser />
-        <div class="cards-job">
-            <div v-for="projeto in projetosStore.projetos" :key="projeto.id">
+  <CardsComponent class="margin-top" />
+  <h1 class="title">Projetos</h1>
+  <div class="flex">
+    <CardUser />
+    <div class="cards-job">
+      <div v-for="projeto in projetosStore.projetosPorCategoria" :key="projeto.id">
         <CardJob :projeto="projeto" />
       </div>
     </div>
@@ -48,6 +59,7 @@ h1 {
   flex-direction: column;
   gap: 15px;
 }
+
 .margin-top {
   margin-top: 30px;
 }

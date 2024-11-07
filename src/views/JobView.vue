@@ -1,9 +1,9 @@
 <script setup>
-import { ContentMainJob, HeaderComponent, FooterComponent } from "@/components";
+import { ContentMainJob, HeaderLoggedPage, FooterComponent } from "@/components";
 </script>
 
 <template>
-    <HeaderComponent/>
+    <HeaderLoggedPage/>
     <ContentMainJob/>
     <FooterComponent/>
 </template>

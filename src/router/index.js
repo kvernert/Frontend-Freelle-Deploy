@@ -63,11 +63,6 @@ const router = createRouter({
       name: 'Update',
       component: UpdateProfile
     },
-    {
-      path: '/job-page',
-      name: 'Job',
-      component: JobView,
-    },
      {
       path: '/adicao-job',
       name: 'ProjetoAdicao',
@@ -82,7 +77,13 @@ const router = createRouter({
       path: '/profile-page',
       name: 'Profile',
       component: ProfilePage,
-     }
+     },
+     {
+      path: '/categorias/:categoriaId/projetos',
+      name: 'categorias-projetos',
+      component: JobView,
+      props: true, 
+    },
   ],
 });
 

@@ -5,10 +5,12 @@ import { useLoadingStore } from '@/stores/loading'
 
 export const useProjetosStore = defineStore('projeto', () => {
   const state = reactive({
-    projetos: []
+    projetos: [],
+    projetosPorCategoria: [],  
   })
 
   const projetos = computed(() => state.projetos)
+  const projetosPorCategoria = computed(() => state.projetosPorCategoria)  
   const loadingStore = useLoadingStore()
 
   const getAllProjetos = async () => {
@@ -62,5 +64,27 @@ export const useProjetosStore = defineStore('projeto', () => {
     }
   }
 
-  return { projetos, getAllProjetos, createProjeto, deleteProjeto, updateProjeto }
+  const getProjetosPorCategoria = async (categoriaId) => {
+    loadingStore.startLoading();
+    try {
+      const data = await ProjetoService.getProjetosyCategoria(categoriaId);
+      
+      state.projetosPorCategoria = data;
+    } catch (error) {
+      console.error('Erro ao buscar projetos por categoria:', error);
+    } finally {
+      loadingStore.stopLoading();
+    }
+  }
+  
+
+  return { 
+    projetos, 
+    projetosPorCategoria, 
+    getAllProjetos, 
+    createProjeto, 
+    deleteProjeto, 
+    updateProjeto,
+    getProjetosPorCategoria,  
+  }
 })
