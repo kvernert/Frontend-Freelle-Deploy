@@ -18,7 +18,7 @@ const checkScreenSize = () => {
 const login = async () => {
   try {
     await authStore.LoginUser({ value: username.value, password: password.value });
-    router.push('/');
+    router.push('/home-logged');
   } catch (error) {
     errorMessage.value = 'Falha no login. Verifique seu e-mail e senha.';
     console.error('Login failed', error);

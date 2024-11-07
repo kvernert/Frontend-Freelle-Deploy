@@ -9,6 +9,7 @@ import CadastroUsuario from '@/components/auth/CadastroUsuario.vue';
 import RecuperacaoSenha from '@/components/auth/RecuperacaoSenha.vue';
 import ValidacaoSenha from '@/components/auth/ValidacaoSenha.vue';
 import AdicaoProjeto from '@/components/ProjectAdd/AdicaoProjeto.vue';
+import HomeLoggedView from '@/views/HomeLoggedView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -59,13 +60,16 @@ const router = createRouter({
       path: '/job-page',
       name: 'Job',
       component: JobView,
-    }
-      component: UpdateProfile,
-     },
+    },
      {
       path: '/adicao-job',
       name: 'ProjetoAdicao',
       component: AdicaoProjeto,
+     },
+     {
+      path: '/home-logged',
+      name: 'HomeLogged',
+      component: HomeLoggedView,
      }
   ],
 });

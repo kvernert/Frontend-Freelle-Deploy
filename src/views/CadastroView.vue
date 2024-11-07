@@ -66,7 +66,7 @@ const register = async () => {
             <label for="password-confirm" class="labelForm">Confirme sua senha...</label>
           </div>
 
-          <button type="submit" class="btnCriar">Criar conta</button> <!-- Chama a função register no envio -->
+          <button type="submit" class="btnCriar">Criar conta</button>
 
           <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
           <p class="FormP Pf">Protegido por reCAPTCHA - Privacidade | Condições</p>
