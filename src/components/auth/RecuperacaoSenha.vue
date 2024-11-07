@@ -1,19 +1,33 @@
 <script setup>
-import { HeaderComponent, HeaderSmall, } from "@/components";
+import { HeaderComponent, HeaderSmall } from "@/components";
 import { ref, onMounted } from 'vue';
+import { useAuthStore } from "@/stores/auth";  
+import { useRouter } from 'vue-router';
 
 const isSmallScreen = ref(false);
+const email = ref(""); 
+
+const router = useRouter();
+const authStore = useAuthStore();
 
 const checkScreenSize = () => {
   isSmallScreen.value = window.innerWidth <= 768;
+};
+
+const forgotPassword = async () => {
+  try {
+    await authStore.ForgotPasswordUser(email.value); 
+    router.push("/validacao")
+    alert("Código de recuperação enviado para seu email!");
+  } catch (error) {
+    alert("Erro ao enviar o código de recuperação. Tente novamente.");
+  }
 };
 
 onMounted(() => {
   checkScreenSize();
   window.addEventListener('resize', checkScreenSize);
 });
-
-
 </script>
 
 <template>
@@ -28,30 +42,28 @@ onMounted(() => {
     </div>
     <div class="containerPrincipal">
       <div class="FormBot">
-        <form @submit.prevent="login" class="wrapForm">
-          <!-- "Olá!" alinhado à esquerda -->
+        <form @submit.prevent="forgotPassword" class="wrapForm">
           <h4 class="Text">Esqueceu sua senha?</h4>
 
           <div class="input-container">
-             
             <input
-              type="password"
-              id="password"
+              type="email"
+              id="email"
               class="marginForm inputForm"
+              v-model="email" 
+              required
             />
             <label for="email" class="labelForm">Digite seu email</label>
           </div>
 
-          <router-link to="/">
-            <button type="button" class="btnCriar mt-3">Enviar Código</button>
-          </router-link>
+          <button type="submit" class="btnCriar mt-3">Enviar Código</button>
           <p class="mt-4 FormP Pf">Protegido por reCAPTCHA - Privacidade | Condições</p>
         </form>
       </div>
     </div>
   </div>
-
 </template>
+
 
 <style scoped>
 .body {
@@ -139,6 +151,7 @@ onMounted(() => {
   width: 100%;
   height: 45px;
   margin-top: 18px;
+  cursor: pointer;
   font-size: 18px;
   font-weight: bold;
 }

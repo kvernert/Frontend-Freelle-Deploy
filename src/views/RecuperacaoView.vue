@@ -3,7 +3,6 @@ import { RecuperacaoSenha } from "@/components";
 </script>
 
 <template>
-  <RouterView/>
   <RecuperacaoSenha/>
 </template>
 

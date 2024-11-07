@@ -1,17 +1,39 @@
 <script setup>
 import { FooterComponent, HeaderComponent, HeaderSmall, FooterSmall } from "@/components";
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { useAuthStore } from '@/stores/auth'; 
 
-const isSmallScreen = ref(false);
+const router = useRouter();
+const authStore = useAuthStore();
 
-const checkScreenSize = () => {
-  isSmallScreen.value = window.innerWidth <= 768;
+const username = ref('');
+const email = ref('');
+const password = ref('');
+const passwordConfirm = ref('');
+
+const errorMessage = ref('');
+
+const register = async () => {
+  if (password.value !== passwordConfirm.value) {
+    errorMessage.value = 'As senhas não coincidem!';
+    return;
+  }
+
+  const userData = {
+    username: username.value,
+    email: email.value,
+    password: password.value,
+  };
+
+  try {
+    await authStore.RegisterUser(userData);
+    router.push('/login'); 
+  } catch (error) {
+    errorMessage.value = 'Erro ao registrar usuário. Tente novamente mais tarde.';
+    console.error('Erro no registro:', error);
+  }
 };
-
-onMounted(() => {
-  checkScreenSize();
-  window.addEventListener('resize', checkScreenSize);
-});
 </script>
 
 <template>
@@ -23,30 +45,30 @@ onMounted(() => {
 
     <div class="containerPrincipal">
       <div class="FormBot">
-        <form @submit.prevent="login" class="wrapForm">
+        <form @submit.prevent="register" class="wrapForm"> <!-- Altere para chamar o método register -->
           <h4 class="TextLeft">Olá!</h4>
           <p class="FormPLeft">Faça o seu cadastro por aqui!</p>
 
           <div class="input-container">
-            <input type="text" id="username" class="inputForm" />
+            <input type="text" id="username" v-model="username" class="inputForm" />
             <label for="username" class="labelForm">Digite seu nome...</label>
           </div>
           <div class="input-container">
-            <input type="email" id="email" class="inputForm" />
+            <input type="email" id="email" v-model="email" class="inputForm" />
             <label for="email" class="labelForm">Digite seu email...</label>
           </div>
           <div class="input-container">
-            <input type="password" id="password" class="inputForm" />
+            <input type="password" id="password" v-model="password" class="inputForm" />
             <label for="password" class="labelForm">Crie sua senha...</label>
           </div>
           <div class="input-container">
-            <input type="password" id="password-confirm" class="inputForm" />
+            <input type="password" id="password-confirm" v-model="passwordConfirm" class="inputForm" />
             <label for="password-confirm" class="labelForm">Confirme sua senha...</label>
           </div>
 
-          <router-link to="/cadastro">
-            <button type="button" class="btnCriar">Criar conta</button>
-          </router-link>
+          <button type="submit" class="btnCriar">Criar conta</button>
+
+          <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
           <p class="FormP Pf">Protegido por reCAPTCHA - Privacidade | Condições</p>
         </form>
       </div>
@@ -80,6 +102,13 @@ body {
   min-height: 90vh;
   background: #006B63;
 }
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
 
 .containerPrincipal {
   width: 440px;
@@ -133,6 +162,7 @@ body {
   margin-top: 20px;
   font-size: 18px;
   font-weight: bold;
+  cursor: pointer;
   background-color: white;
   border: 2px solid #006B63;
   color: #006B63;

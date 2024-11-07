@@ -1,9 +1,20 @@
 <script setup>
 import { HeaderComponent, HeaderSmall } from "@/components";
 import { ref, onMounted } from 'vue';
+import { useAuthStore } from '@/stores/auth';  
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const isSmallScreen = ref(false);
+const resetData = ref({
+  code: Array(6).fill(''),
+  new_password: "",
+  confirmPassword: "",
+});
 
+const authStore = useAuthStore();
+
+// Verifica o tamanho da tela
 const checkScreenSize = () => {
   isSmallScreen.value = window.innerWidth <= 768;
 };
@@ -13,6 +24,7 @@ onMounted(() => {
   window.addEventListener('resize', checkScreenSize);
 });
 
+// Função para mover o foco entre os campos de código
 const moveFocus = (event, currentIndex) => {
   const inputs = document.querySelectorAll('.code-input');
   if (event.target.value !== "" && currentIndex < inputs.length - 1) {
@@ -21,8 +33,40 @@ const moveFocus = (event, currentIndex) => {
     inputs[currentIndex - 1].focus();
   }
 };
-</script>
 
+// Função para redefinir a senha
+const resetPassword = async () => {
+  const codeString = resetData.value.code.join(''); 
+
+  if (resetData.value.new_password !== resetData.value.confirmPassword) {
+    alert("As senhas não coincidem.");
+    return;
+  }
+
+  if (codeString.length !== 6) {
+    alert("O código precisa ter 6 dígitos.");
+    return;
+  }
+
+  try {
+
+    await authStore.ResetPasswordUser({ 
+      reset_code: codeString, 
+      new_password: resetData.value.new_password 
+    });
+    router.push("/login")
+    alert("Senha alterada com sucesso!");
+  } catch (error) {
+    alert("Erro ao resetar a senha. Tente novamente.");
+  }
+};
+</script>
+1
+1
+9
+0
+5
+8
 <template>
   <!-- Header Grande (escondido em telas pequenas) -->
   <header-component v-if="!isSmallScreen" />
@@ -35,46 +79,41 @@ const moveFocus = (event, currentIndex) => {
     </div>
     <div class="containerPrincipal">
       <div class="FormBot">
-        <form @submit.prevent="login" class="wrapForm">
-          <h4 class="Text">Digite o Código</h4>
+        <form @submit.prevent="resetPassword" class="wrapForm">
+          <h4 class="Text">Digite o código que foi enviado no email</h4>
           <div class="code-container mt-3">
-            <!-- Primeiro grupo de três inputs -->
+            <!-- Código de redefinição em 6 campos -->
             <input
-              v-for="(input, index) in 3"
+              v-for="(input, index) in 6"
               :key="index"
               type="text"
               maxlength="1"
               class="code-input"
+              v-model="resetData.code[index]"
               @input="moveFocus($event, index)"
-            />
-            <!-- Traço separador -->
-            <span class="separator">-</span>
-            <!-- Segundo grupo de três inputs -->
-            <input
-              v-for="(input, index) in 3"
-              :key="index + 3"
-              type="text"
-              maxlength="1"
-              class="code-input"
-              @input="moveFocus($event, index + 3)"
             />
           </div>
 
           <div class="input-container">
             <input
-              type="text"
-              id="username"
+              type="password"
+              id="password"
               class="inputForm"
+              v-model="resetData.new_password"
+              required
             />
             <label for="password" class="labelForm">Crie sua nova senha...</label>
           </div>
+
           <div class="input-container">
             <input
               type="password"
-              id="password"
+              id="confirmPassword"
               class="marginForm inputForm"
+              v-model="resetData.confirmPassword"
+              required
             />
-            <label for="password" class="labelForm">Confirme sua nova senha...</label>
+            <label for="confirmPassword" class="labelForm">Confirme sua nova senha...</label>
           </div>
 
           <button type="submit" class="btnAtualizar mt-3">Atualizar</button>
@@ -105,7 +144,6 @@ const moveFocus = (event, currentIndex) => {
   width: 100%;
   min-height: 100vh;
   background: #006B63;
-  
 }
 
 .containerPrincipal {
@@ -125,7 +163,6 @@ const moveFocus = (event, currentIndex) => {
 .input-container {
   position: relative;
   margin-top: 28px;
-
 }
 
 .inputForm {
@@ -135,7 +172,6 @@ const moveFocus = (event, currentIndex) => {
   border: 1px solid #006B63;
   outline: none;
   transition: all 0.3s;
-  
 }
 
 .inputForm:focus + .labelForm {
@@ -159,6 +195,7 @@ const moveFocus = (event, currentIndex) => {
   width: 100%;
   height: 45px;
   margin-top: 15px;
+  cursor: pointer;
   font-size: 18px;
   font-weight: bold;
 }
