@@ -61,12 +61,7 @@ const resetPassword = async () => {
   }
 };
 </script>
-1
-1
-9
-0
-5
-8
+
 <template>
   <!-- Header Grande (escondido em telas pequenas) -->
   <header-component v-if="!isSmallScreen" />

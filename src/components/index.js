@@ -17,6 +17,7 @@ import HeaderLoggedPage from "./homeLoggedPage/HeaderLoggedPage.vue";
 import ContentLoggedPage from "./homeLoggedPage/ContentLoggedPage.vue";
 import CardJob from "./jobPage/CardJob.vue";
 import CardUser from "./jobPage/CardUser.vue";
+import ProfilePage from "./ProfilePage/ProfilePage.vue";
 
 export {
     FooterComponent,
@@ -38,4 +39,5 @@ export {
     ContentLoggedPage,
     CardJob,
     CardUser,
+    ProfilePage
 };

@@ -1,10 +1,15 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
-import { useCategoriasStore } from '@/stores';
+import { useRoute } from 'vue-router';  // Para acessar os parâmetros da rota
+import { useCategoriasStore } from '@/stores';  // Para acessar as categorias
 
 const categoriaStore = useCategoriasStore();
-const categorias = computed(() => categoriaStore.categorias); 
+const categorias = computed(() => categoriaStore.categorias);
 const currentIndex = ref(0);
+
+// Acesso à rota para pegar o parametro categoriaId da URL
+const route = useRoute();
+const currentCategoriaId = computed(() => route.params.categoriaId); 
 
 const next = () => {
   if (categorias.value.length) {
@@ -30,7 +35,7 @@ const handleResize = () => {
 
 onMounted(() => {
   window.addEventListener('resize', handleResize);
-  categoriaStore.getAllCategorias();
+  categoriaStore.getAllCategorias(); // Certifique-se de que as categorias são carregadas
 });
 
 onBeforeUnmount(() => {
@@ -47,17 +52,15 @@ onBeforeUnmount(() => {
           <div 
             v-for="(card, index) in (isMediumScreen ? categorias.slice(currentIndex, currentIndex + 6) : categorias.slice(currentIndex, currentIndex + 3))" 
             :key="index" 
-            class="card">
-            <router-link v-if="card.nome === 'Design Gráfico'" :to="{ name: 'design' }" class="router-link">
+            class="card"
+            :class="{ 'active-card': currentCategoriaId === String(card.id) }"  
+          >
+            <router-link :to="{ name: 'categorias-projetos', params: { categoriaId: card.id } }" class="router-link">
               <div class="icon-title">
                 <i :class="card.icon" class="card-icon"></i>
                 <h3 class="card-title">{{ card.nome }}</h3>
               </div>
             </router-link>
-            <div v-else class="icon-title">
-              <i :class="card.icon" class="card-icon"></i>
-              <h3 class="card-title">{{ card.nome }}</h3>
-            </div>
           </div>
         </div>
       </div>
@@ -66,17 +69,15 @@ onBeforeUnmount(() => {
           <div 
             v-for="(card, index) in categorias" 
             :key="index" 
-            class="card">
-            <router-link v-if="card.title === 'Design Gráfico'" :to="{ name: 'design' }">
+            class="card"
+            :class="{ 'active-card': currentCategoriaId === String(card.id) }"  
+          >
+            <router-link :to="{ name: 'categorias-projetos', params: { categoriaId: card.id } }">
               <div class="icon-title">
                 <i :class="card.icon" class="card-icon"></i>
                 <h3 class="card-title">{{ card.nome }}</h3>
               </div>
             </router-link>
-            <div v-else class="icon-title">
-              <i :class="card.icon" class="card-icon"></i>
-              <h3 class="card-title">{{ card.nome }}</h3>
-            </div>
           </div>
         </div>
       </div>
@@ -125,6 +126,11 @@ onBeforeUnmount(() => {
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+.active-card {
+  border: 2px solid #006b63;
+  box-shadow: 0px 8px 16px rgba(0, 123, 255, 0.2); /* Sombra mais forte */
+}
+
 .icon-title {
   display: flex;
   flex-direction: column;
@@ -159,6 +165,7 @@ onBeforeUnmount(() => {
 .right {
   right: 10px; 
 }
+
 .router-link {
   color: black;
   text-decoration: none;
@@ -169,5 +176,4 @@ onBeforeUnmount(() => {
   color: inherit;
   text-decoration: none;
 }
-
 </style>
