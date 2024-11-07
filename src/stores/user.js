@@ -47,23 +47,25 @@ export const useUserStore = defineStore('user', () => {
     }
   };
 
-const updateMeUser = async (authToken, userData) => {
-  loadingStore.startLoading();
-
-  try {
-    const data = await UserService.updateMeUser(authToken, userData);
-    if (JSON.stringify(state.currentUser) !== JSON.stringify(data)) {
-      console.log('Dados recebidos:', data);
-      state.currentUser = data; // Atualize o estado
+  const updateMeUser = async (authToken, formData) => {
+    loadingStore.startLoading();
+  
+    try {
+      const response = await UserService.updateMeUser(authToken, formData);
+      
+      if (JSON.stringify(state.currentUser) !== JSON.stringify(response.data)) {
+        console.log('Dados recebidos:', response.data);
+        state.currentUser = response.data; 
+      }
+  
+      state.error = null;
+    } catch (error) {
+      state.error = 'Erro ao atualizar o perfil';
+      console.error('Erro ao atualizar o perfil:', error);
+    } finally {
+      loadingStore.stopLoading();
     }
-    state.error = null;
-  } catch (error) {
-    state.error = 'Erro ao atualizar o perfil';
-    console.error('Erro ao atualizar o perfil:', error);
-  } finally {
-    loadingStore.stopLoading();
-  }
-};
+  };
 
   
 

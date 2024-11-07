@@ -29,7 +29,8 @@ class UserService {
         try {
             const response = await axios.patch('/usuarios/update_me/', userData, {
               headers: {
-                Authorization: `Bearer ${authToken}`
+                Authorization: `Bearer ${authToken}`,
+                'Content-Type': 'multipart/form-data'
               }
             });
             console.log('Resposta da API:', response.data); 

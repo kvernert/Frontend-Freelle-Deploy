@@ -1,8 +1,7 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
-import { useUserStore } from '@/stores/user'; // Store de usuário
+import { useUserStore } from '@/stores/user'; 
 
-// Definindo variáveis reativas para armazenar as informações do usuário
 const provider = ref({
   name: "",
   username: "",
@@ -20,13 +19,12 @@ const provider = ref({
 const userStore = useUserStore();
 
 onMounted(() => {
-  const token = localStorage.getItem("authToken"); // ou de onde você estiver armazenando o token
+  const token = localStorage.getItem("authToken"); 
   if (token) {
-    userStore.getMeUser(token); // Carregar o usuário no store
+    userStore.getMeUser(token); 
   }
 });
 
-// Observa mudanças no currentUser e atualiza as informações do provider
 watch(() => userStore.currentUser, (newUser) => {
   if (newUser) {
     provider.value.name = newUser.name;

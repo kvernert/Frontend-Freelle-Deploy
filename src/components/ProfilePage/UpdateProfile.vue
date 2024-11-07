@@ -32,7 +32,6 @@ const userData = ref({
   instagram: '',
   linkedin: '',
   foto: '',
-  foto_str: '', // Campo para armazenar a string da foto
   formacao: null
 });
 
@@ -40,18 +39,12 @@ const nacionalidades = computed(() => nacionalidadeStore.nacionalidades);
 const formacoes = computed(() => formacaoStore.formacoes);
 
 const handleFileUpload = (event) => {
-  const file = event.target.files[0];
-
+  const file = event.target.files[0]; // Pega o primeiro arquivo
   if (file) {
-    const reader = new FileReader();
-    
-    reader.onloadend = () => {
-      userData.value.foto_str = reader.result;
-    };
-    
-    reader.readAsDataURL(file); 
+    userData.value.foto = file; // Atribui o arquivo à propriedade foto
   }
 };
+
 
 const updateProfile = async () => {
   try {
@@ -62,16 +55,24 @@ const updateProfile = async () => {
       return;
     }
 
-    const dataToUpdate = Object.fromEntries(
-      Object.entries(userData.value || {}).filter(([ value]) => value !== '' && value !== null)
-    );
+    // Cria o FormData
+    const formData = new FormData();
+    formData.append('name', userData.value.name);
+    formData.append('email', userData.value.email);
+    formData.append('biografia', userData.value.biografia);
+    formData.append('nacionalidade', userData.value.nacionalidade);
+    formData.append('linguagem_principal', userData.value.linguagem_principal);
+    formData.append('especializacao', userData.value.especializacao);
+    formData.append('instagram', userData.value.instagram);
+    formData.append('linkedin', userData.value.linkedin);
+    formData.append('formacao', userData.value.formacao);
 
-    if (userData.value.foto_str) {
-      // Envia a foto convertida para base64
-      dataToUpdate.foto_str = userData.value.foto_str;
+    // Se houver uma foto, envia-a
+    if (userData.value.foto) {
+      formData.append('foto', userData.value.foto);
     }
 
-    await userStore.updateMeUser(authToken, dataToUpdate);
+    await userStore.updateMeUser(authToken, formData);
     alert('Perfil atualizado com sucesso!');
   } catch (error) {
     console.error('Erro ao atualizar o perfil:', error);
@@ -92,7 +93,7 @@ const updateProfile = async () => {
 
       <div class="profile-form-container">
         <div class="profile-section">
-          <img :src="userData.foto_str || 'default-avatar.png'" alt="Foto de perfil" class="profile-img" />
+          <img :src="userData.foto || 'default-avatar.png'" alt="Foto de perfil" class="profile-img" />
           <div class="input-container">
             <label for="foto">Escolha uma foto</label>
             <input type="file" id="foto" accept="image/*" @change="handleFileUpload" />
