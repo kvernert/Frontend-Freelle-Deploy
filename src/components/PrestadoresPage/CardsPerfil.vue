@@ -24,16 +24,20 @@ export default {
 
 <template>
   <div class="profile-container">
-    <!-- Left side with profile details -->
+    <!-- Esquerda: Perfil e Detalhes -->
     <div class="profile-left">
       <div class="profile-header">
         <img :src="provider.image" alt="Profile Image" class="profile-image" />
         <div class="profile-info">
-          <h1>{{ provider.name }} <span class="username">{{ provider.username }}</span> <i class="mdi mdi-check-decagram verified-icon"></i></h1>
+          <h1>
+            {{ provider.name }}
+            <span class="username">{{ provider.username }}</span>
+            <i class="mdi mdi-check-decagram verified-icon"></i>
+          </h1>
           <p class="location">
-            <i class="mdi mdi-map-marker"></i> {{ provider.location }} 
-            </p>
-            <p class="location">
+            <i class="mdi mdi-map-marker"></i> {{ provider.location }}
+          </p>
+          <p class="location">
             <i class="mdi mdi-translate"></i> {{ provider.language }}
           </p>
         </div>
@@ -62,7 +66,7 @@ export default {
       </div>
     </div>
 
-    <!-- Right side with contact card -->
+    <!-- Direita: Card de Contato (oculto em telas pequenas) -->
     <div class="contact-card">
       <button class="favorite-btn">
         <i class="mdi mdi-heart-outline"></i>
@@ -81,11 +85,13 @@ export default {
 <style scoped>
 .profile-container {
   display: flex;
+  flex-direction: row;
   padding: 20px;
   font-family: 'Arial', sans-serif;
 }
 
 .profile-left {
+  flex: 1;
   width: 100%;
 }
 
@@ -192,6 +198,7 @@ export default {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   position: relative;
+  margin-left: 20px;
 }
 
 .favorite-btn {
@@ -207,24 +214,6 @@ export default {
 
 .favorite-btn:hover {
   color: #006B63;
-}
-
-.contact-content {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-top: 10px;
-}
-
-.contact-name {
-  font-size: 18px;
-  font-weight: bold;
-  margin: 0;
-}
-
-.contact-card .username {
-  font-size: 14px;
-  color: #666;
 }
 
 .contact-btn {
@@ -251,5 +240,32 @@ export default {
 
 .contact-btn:hover {
   background-color: #f0f0f0;
+}
+@media (max-width: 768px) {
+
+  .profile-image {
+    width: 100px;
+    height: 100px;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .profile-info h1 {
+    font-size: 20px;
+    padding-left: 10px;
+  }
+  .contact-card {
+    display: none;
+  }
+
+  .expertise h3 {
+    font-size: 16px;
+  }
+
+  .location,
+  .review-count,
+  .detail-label {
+    font-size: 14px;
+  }
 }
 </style>

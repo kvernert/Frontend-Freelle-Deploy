@@ -27,7 +27,6 @@ const providers = computed(() => userStore.UsersLimeted);
             </h3>
             <p>{{ provider.name }}</p>
             <p>@{{ provider.username }}</p>
-            <!-- <p><i class="mdi mdi-star"></i>{{ provider.rating.toFixed(1) }}</p> -->
           </div>
           <div class="provider-actions">
             <button class="btn">
@@ -39,10 +38,10 @@ const providers = computed(() => userStore.UsersLimeted);
             <button class="btn">Ver Perfil</button>
           </div>
           <div class="provider-social">
-            <a :href="provider.linkedin" target="_blank">
+            <a :href="provider.linkedin" target="_blank" class="no-decoration">
               <i class="mdi mdi-linkedin"></i>
             </a>
-            <a :href="provider.instagram" target="_blank">
+            <a :href="provider.instagram" target="_blank" class="no-decoration">
               <i class="mdi mdi-instagram"></i>
             </a>
           </div>
@@ -51,7 +50,6 @@ const providers = computed(() => userStore.UsersLimeted);
     </div>
   </div>
 </template>
-
 
 <style scoped>
 .provider-section {
@@ -160,16 +158,8 @@ h2 {
   color: #000000;
   font-size: 25px;
 }
-@media (max-width: 1500px) {
-  .provider-container {
-    display: flex;
-    flex-direction: column; 
-    gap: 20px; 
-  }
 
-  .provider-card {
-    width: 100%; 
-  }
+.no-decoration {
+  text-decoration: none;
 }
-
 </style>
