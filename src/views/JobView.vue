@@ -11,13 +11,15 @@ onMounted(() => {
   checkScreenSize();
   window.addEventListener('resize', checkScreenSize);
 });
+import { ContentMainJob, HeaderLoggedPage, FooterComponent } from "@/components";
 </script>
 
 <template>
-    <header-component v-if="!isSmallScreen" />
+    <HeaderLoggedPage v-if="!isSmallScreen" />
     <header-small v-if="isSmallScreen" />
     <div class="container">
-        <ContentMainJob/>
+
+    <ContentMainJob/>
     <div class="footer">
     <footer-component v-if="!isSmallScreen" />
     <footer-small v-if="isSmallScreen" />
@@ -25,6 +27,8 @@ onMounted(() => {
   </div>
   </template>
   
+ 
+</template>
 
 <style scoped>
 

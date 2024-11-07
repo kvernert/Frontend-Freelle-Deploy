@@ -14,5 +14,4 @@ const loadingStore = useLoadingStore();
 </template>
 
 <style scoped>
-/* Se necessário, adicione estilos para o container ou layout principal */
 </style>

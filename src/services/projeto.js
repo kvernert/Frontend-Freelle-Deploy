@@ -16,6 +16,15 @@ class ProjetoService {
             const response = await axios.put(`projetos/${id}/`, projetoData);
             return response.data;
     }
+  async getProjetosyCategoria(categoriaId) {
+    try {
+        const response = await axios.get(`projetos/?categoria_id=${categoriaId}`);
+        return response.data.results;
+      } catch (error) {
+        console.error('Erro ao buscar projetos por categoria:', error);
+        throw error;
+      }
+  }
 
 }
 

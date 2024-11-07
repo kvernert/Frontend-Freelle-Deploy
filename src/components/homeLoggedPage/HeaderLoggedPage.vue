@@ -1,26 +1,3 @@
-<script setup>
-import { useAuthStore } from '@/stores/auth'
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-
-const authStore = useAuthStore()
-const router = useRouter()
-
-const showMenu = ref(false)
-
-const toggleMenu = () => {
-  showMenu.value = !showMenu.value
-}
-
-const logout = () => {
-  authStore.LogoutUser()
-  showMenu.value = false
-  router.push('/')
-}
-
-const searchQuery = ref('')
-</script>
-
 <template>
   <div class="header">
     <div class="header-container">
@@ -41,11 +18,11 @@ const searchQuery = ref('')
         <button class="btn">Português</button>
 
         <button @click="toggleMenu" class="user-avatar-button">
-          <img src="https://via.placeholder.com/40" alt="User Avatar" class="user-avatar" />
+          <img :src="userStore.currentUser.foto ? userStore.currentUser.foto.url : 'https://via.placeholder.com/40'" alt="User Avatar" class="user-avatar" />
         </button>
 
         <div v-if="showMenu" class="user-menu">
-          <router-link to="/profile" class="reset-link">
+          <router-link to="/profile-page" class="reset-link">
             <p>Ver perfil</p>
           </router-link>
           <p @click="logout()">Sair</p>
@@ -54,6 +31,41 @@ const searchQuery = ref('')
     </div>
   </div>
 </template>
+
+<script setup>
+import { useAuthStore } from '@/stores/auth'
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+
+const authStore = useAuthStore()
+const router = useRouter()
+
+const showMenu = ref(false)
+
+const toggleMenu = () => {
+  showMenu.value = !showMenu.value
+}
+
+const logout = () => {
+  authStore.LogoutUser()
+  showMenu.value = false
+  router.push('/')
+}
+
+import { useUserStore } from '@/stores/user'
+
+const userStore = useUserStore()
+
+onMounted(() => {
+  const token = localStorage.getItem("authToken")
+  if (token) {
+    userStore.getMeUser(token)
+  }
+})
+
+const searchQuery = ref('')
+</script>
+
 
 <style scoped>
 .header {
