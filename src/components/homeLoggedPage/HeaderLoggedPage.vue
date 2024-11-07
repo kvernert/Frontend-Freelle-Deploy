@@ -18,7 +18,7 @@
         <button class="btn">Português</button>
 
         <button @click="toggleMenu" class="user-avatar-button">
-          <img :src="userStore.currentUser.foto ? userStore.currentUser.foto.url : 'https://via.placeholder.com/40'" alt="User Avatar" class="user-avatar" />
+          <img :src="userStore.currentUser?.foto?.url || 'https://via.placeholder.com/40'" alt="User Avatar" class="user-avatar" />
         </button>
 
         <div v-if="showMenu" class="user-menu">
@@ -59,7 +59,11 @@ const userStore = useUserStore()
 onMounted(() => {
   const token = localStorage.getItem("authToken")
   if (token) {
-    userStore.getMeUser(token)
+    userStore.getMeUser(token).then(() => {
+      console.log("Usuário carregado:", userStore.currentUser)
+    }).catch(error => {
+      console.error("Erro ao carregar o usuário:", error)
+    })
   }
 })
 
