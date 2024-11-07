@@ -9,6 +9,15 @@ import CardsPrestadoresSmall from "@/components/homePage/cards/CardsPrestadoresS
 import CarouselOne from "@/components/homePage/cards/CarouselOne.vue";
 import CardsFeitos from "@/components/homePage/cards/CardsFeitos.vue";
 import ContentMainService from "./ServicePage/ContentMainService.vue";
+import CardsPerfil from "./PrestadoresPage/CardsPerfil.vue";
+import CardProjetos from "./PrestadoresPage/CardProjetos.vue"
+import LoadingPage from "./MainComponents/loading/LoadingPage.vue";
+import ContentMainJob from "./jobPage/ContentMainJob.vue";
+import HeaderLoggedPage from "./homeLoggedPage/HeaderLoggedPage.vue";
+import ContentLoggedPage from "./homeLoggedPage/ContentLoggedPage.vue";
+import CardJob from "./jobPage/CardJob.vue";
+import CardUser from "./jobPage/CardUser.vue";
+import ProfilePage from "./ProfilePage/ProfilePage.vue";
 
 export {
     FooterComponent,
@@ -21,5 +30,14 @@ export {
     CardsPrestadoresSmall,
     CarouselOne,
     CardsFeitos,
-    ContentMainService
+    ContentMainService,
+    CardsPerfil,
+    CardProjetos,
+    LoadingPage,
+    ContentMainJob,
+    HeaderLoggedPage,
+    ContentLoggedPage,
+    CardJob,
+    CardUser,
+    ProfilePage
 };

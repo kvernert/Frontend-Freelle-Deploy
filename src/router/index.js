@@ -3,9 +3,15 @@ import HomeView from '../views/HomeView.vue';
 import LayoutFull from '@/layouts/LayoutFull.vue';
 import ServiceView from '@/views/ServiceView.vue';
 import LoginView from '@/views/LoginView.vue';
-import CadastroView from '@/views/CadastroView.vue';
-import RecuperacaoView from '@/views/RecuperacaoView.vue';
-import ValidacaoView from '@/views/ValidacaoView.vue';
+import PrestadoresView from '@/views/PrestadoresView.vue'
+import UpdateProfile from '@/components/ProfilePage/UpdateProfile.vue';
+import JobView from '@/views/JobView.vue';
+import CadastroUsuario from '@/components/auth/CadastroUsuario.vue';
+import RecuperacaoSenha from '@/components/auth/RecuperacaoSenha.vue';
+import ValidacaoSenha from '@/components/auth/ValidacaoSenha.vue';
+import AdicaoProjeto from '@/components/ProjectAdd/AdicaoProjeto.vue';
+import HomeLoggedView from '@/views/HomeLoggedView.vue';
+import ProfilePage from '@/components/ProfilePage/ProfilePage.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,19 +39,50 @@ const router = createRouter({
       component: LoginView,
     },
     {
+      path: '/prestadores',
+      name: 'Prestadores',
+      component: PrestadoresView,
+    },
+    {
       path: '/cadastro',
       name: 'Cadastro',
-      component: CadastroView
+      component: CadastroUsuario
     },
     {
       path: '/recuperacao',
       name: 'RecuperaçaoSenha',
-      component: RecuperacaoView
+      component: RecuperacaoSenha
     },
     {
       path: '/validacao',
       name: 'Validacao',
-      component: ValidacaoView
+      component: ValidacaoSenha
+    },
+    {
+      path: '/update-profile',
+      name: 'Update',
+      component: UpdateProfile
+    },
+     {
+      path: '/adicao-job',
+      name: 'ProjetoAdicao',
+      component: AdicaoProjeto,
+     },
+     {
+      path: '/home-logged',
+      name: 'HomeLogged',
+      component: HomeLoggedView,
+     },
+     {
+      path: '/profile-page',
+      name: 'Profile',
+      component: ProfilePage,
+     },
+     {
+      path: '/categorias/:categoriaId/projetos',
+      name: 'categorias-projetos',
+      component: JobView,
+      props: true, 
     },
   ],
 });
