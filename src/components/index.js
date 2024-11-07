@@ -31,8 +31,7 @@ export {
     CardsFeitos,
     ContentMainService,
     CardsPerfil,
-    CardProjetos
-    ContentMainService,
+    CardProjetos,
     LoadingPage,
     ContentMainJob,
     HeaderLoggedPage,

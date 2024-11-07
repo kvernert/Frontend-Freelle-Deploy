@@ -41,7 +41,7 @@ const router = createRouter({
       path: '/prestadores',
       name: 'Prestadores',
       component: PrestadoresView,
-    }
+    },
     {
       path: '/cadastro',
       name: 'Cadastro',
