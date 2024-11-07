@@ -10,10 +10,10 @@
       <RouterLink to="/login">
         <i class="mdi mdi-account-circle-outline" />
       </RouterLink>
-      <RouterLink to="/">
+      <RouterLink to="/job-page">
         <i class="mdi mdi-account-search" />
       </RouterLink>
-      <RouterLink to="/">
+      <RouterLink to="/adicao-job">
         <i class="mdi mdi-palette-advanced" />
       </RouterLink>
     </div>

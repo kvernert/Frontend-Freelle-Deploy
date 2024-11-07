@@ -72,7 +72,7 @@ onBeforeUnmount(() => {
             class="card"
             :class="{ 'active-card': currentCategoriaId === String(card.id) }"  
           >
-            <router-link :to="{ name: 'categorias-projetos', params: { categoriaId: card.id } }">
+            <router-link :to="{ name: 'categorias-projetos', params: { categoriaId: card.id } }" class="router-link">
               <div class="icon-title">
                 <i :class="card.icon" class="card-icon"></i>
                 <h3 class="card-title">{{ card.nome }}</h3>

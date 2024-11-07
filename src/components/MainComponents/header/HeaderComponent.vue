@@ -43,7 +43,7 @@ const logout = () => {
 
         <div v-else class="auth-buttons">
           <router-link to="/login" class="btn">Entrar</router-link>
-          <router-link class="btn btn-i">Inscrição</router-link>
+          <router-link to="/adicao-job" class="btn btn-i">Inscrição</router-link>
         </div>
       </div>
     </div>
