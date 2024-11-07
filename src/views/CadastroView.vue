@@ -12,6 +12,11 @@ onMounted(() => {
   checkScreenSize();
   window.addEventListener('resize', checkScreenSize);
 });
+
+const username = ref('');
+const email = ref('');
+const password = ref('');
+const passwordConfirm = ref('');
 </script>
 
 <template>
@@ -28,19 +33,19 @@ onMounted(() => {
           <p class="FormPLeft">Faça o seu cadastro por aqui!</p>
 
           <div class="input-container">
-            <input type="text" id="username" class="inputForm" />
+            <input type="text" id="username" class="inputForm" v-model="username" :class="{'active': username}" required />
             <label for="username" class="labelForm">Digite seu nome...</label>
           </div>
           <div class="input-container">
-            <input type="email" id="email" class="inputForm" />
+            <input type="email" id="email" class="inputForm" v-model="email" :class="{'active': email}" required />
             <label for="email" class="labelForm">Digite seu email...</label>
           </div>
           <div class="input-container">
-            <input type="password" id="password" class="inputForm" />
+            <input type="password" id="password" class="inputForm" v-model="password" :class="{'active': password}" required />
             <label for="password" class="labelForm">Crie sua senha...</label>
           </div>
           <div class="input-container">
-            <input type="password" id="password-confirm" class="inputForm" />
+            <input type="password" id="password-confirm" class="inputForm" v-model="passwordConfirm" :class="{'active': passwordConfirm}" required />
             <label for="password-confirm" class="labelForm">Confirme sua senha...</label>
           </div>
 
@@ -113,9 +118,10 @@ body {
 }
 
 .inputForm:focus + .labelForm,
-.labelForm.active {
+.inputForm.active + .labelForm {
   top: -10px;
   font-size: 12px;
+  color: #006B63;
 }
 
 .labelForm {
@@ -125,6 +131,7 @@ body {
   transform: translateY(-50%);
   transition: all 0.3s;
   pointer-events: none;
+  color: #666;
 }
 
 .btnCriar {

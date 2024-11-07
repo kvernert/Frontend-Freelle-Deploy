@@ -3,6 +3,8 @@ import { FooterComponent, HeaderComponent, HeaderSmall, FooterSmall } from "@/co
 import { ref, onMounted } from 'vue';
 
 const isSmallScreen = ref(false);
+const username = ref('');
+const password = ref('');
 
 const checkScreenSize = () => {
   isSmallScreen.value = window.innerWidth <= 768;
@@ -37,16 +39,18 @@ onMounted(() => {
               type="text"
               id="username"
               class="inputForm"
+              v-model="username"
             />
-            <label for="username" class="labelForm">E-mail</label>
+            <label for="username" :class="{'active': username !== ''}" class="labelForm">E-mail</label>
           </div>
           <div class="input-container">
             <input
               type="password"
               id="password"
               class="marginForm inputForm"
+              v-model="password"
             />
-            <label for="password" class="labelForm">Senha</label>
+            <label for="password" :class="{'active': password !== ''}" class="labelForm">Senha</label>
           </div>
 
           <button type="button" style="margin-top: 10px" class="btnSenha">
@@ -61,16 +65,17 @@ onMounted(() => {
       </div>
     </div>
   </div>
-<div class="footer">
-  <!-- Footer Grande (escondido em telas pequenas) -->
-  <footer-component v-if="!isSmallScreen" />
-  <!-- Footer Pequeno (exibido apenas em telas pequenas) -->
-  <footer-small v-if="isSmallScreen" />
-</div>
+  <div class="footer">
+    <!-- Footer Grande (escondido em telas pequenas) -->
+    <footer-component v-if="!isSmallScreen" />
+    <!-- Footer Pequeno (exibido apenas em telas pequenas) -->
+    <footer-small v-if="isSmallScreen" />
+  </div>
 </template>
 
+
 <style scoped>
-.body {
+body {
   background: #006B63;
   height: 100vh;
   display: flex;
@@ -97,7 +102,7 @@ onMounted(() => {
   padding: 40px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
-  text-align: center; /* Mantém o restante do formulário centralizado */
+  text-align: center;
 }
 
 .logo-top {
@@ -107,11 +112,11 @@ onMounted(() => {
 
 .TextLeft {
   font-size: bold;
-  text-align: left; /* Alinha o texto "Olá!" à esquerda */
+  text-align: left;
 }
 
 .FormPLeft {
-  text-align: left; /* Alinha o texto "Para continuar, digite seu e-mail" à esquerda */
+  text-align: left;
 }
 
 .input-container {
@@ -128,7 +133,8 @@ onMounted(() => {
   transition: all 0.3s;
 }
 
-.inputForm:focus + .labelForm {
+.inputForm:focus + .labelForm,
+.inputForm.active + .labelForm {
   top: -10px;
   font-size: 12px;
 }
@@ -140,6 +146,7 @@ onMounted(() => {
   transform: translateY(-50%);
   transition: all 0.3s;
   pointer-events: none;
+  font-size: 16px;
 }
 
 .labelForm.active {
@@ -165,12 +172,12 @@ onMounted(() => {
   background-color: white;
   border: 2px solid #006B63;
   color: #006B63;
-  transition: all 0.3s ease; /* Transição para o hover */
+  transition: all 0.3s ease;
 }
 
 .btnCriar:hover {
-  background-color: #006B63; /* Cor de fundo no hover */
-  color: white; /* Cor do texto no hover */
+  background-color: #006B63;
+  color: white;
 }
 
 .btnSenha {
@@ -210,7 +217,7 @@ onMounted(() => {
   }
 
   .logo {
-    width: 140px; /* Diminui mais o tamanho da logo em telas pequenas */
+    width: 140px;
   }
 }
 
@@ -230,4 +237,4 @@ onMounted(() => {
     font-size: 14px;
   }
 }
-</style>limpe o codigo
+</style>
