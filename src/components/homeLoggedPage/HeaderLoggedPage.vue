@@ -45,7 +45,7 @@ const searchQuery = ref('')
         </button>
 
         <div v-if="showMenu" class="user-menu">
-          <router-link to="/profile" class="reset-link">
+          <router-link to="/profile-page" class="reset-link">
             <p>Ver perfil</p>
           </router-link>
           <p @click="logout()">Sair</p>

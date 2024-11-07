@@ -1,5 +1,13 @@
 <script setup>
-import {CardsComponent, CardJob, CardUser} from '@/components'
+import { onMounted } from 'vue'
+import { useProjetosStore } from '@/stores/projeto'
+import { CardsComponent, CardJob, CardUser } from '@/components'
+
+const projetosStore = useProjetosStore()
+
+onMounted(() => {
+  projetosStore.getAllProjetos()
+})
 </script>
 
 <template>
@@ -13,16 +21,17 @@ import {CardsComponent, CardJob, CardUser} from '@/components'
         <div class="flex">
             <CardUser/>
             <div class="cards-job">
-            <h1 class="title">Melhor Raking</h1>
-            <CardJob/>
-            <CardJob/>
-            <CardJob/>
+                <h1 class="title">Melhor Raking</h1>
+                <!-- Limita a exibição a apenas 3 projetos -->
+                <div v-for="projeto in projetosStore.projetos.slice(0, 3)" :key="projeto.id">
+                    <CardJob :projeto="projeto" />
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="card-section">
-    <h2>Feitos no Freele</h2>
-  <img src="https://i.ibb.co/phgw2Yc/feitos.png" alt="Feitos no Freelle" class="img-feito"/>
-  </div>
+        <div class="card-section">
+            <h2>Feitos no Freele</h2>
+            <img src="https://i.ibb.co/phgw2Yc/feitos.png" alt="Feitos no Freelle" class="img-feito"/>
+        </div>
     </div>
 </template>
 
@@ -43,18 +52,22 @@ h1 {
     font-size: 2em;
     font-weight: bold;
 }
-.cards{
+
+.cards {
     margin-top: 5em;
     margin-bottom: 6em;
 }
+
 .cards-job {
     display: flex;       
     flex-direction: column; 
     gap: 15px;           
 }
-.margin-top{
+
+.margin-top {
     margin-top: 30px;
 }
+
 .box-img {
     display: flex;
     justify-content: center;
@@ -66,6 +79,7 @@ h1 {
     max-width: 100%;
     height: auto;
 }
+
 .card-section {
   text-align: left;
   margin: 20px;

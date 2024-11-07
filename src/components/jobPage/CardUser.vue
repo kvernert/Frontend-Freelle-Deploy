@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="box-img">
-            <img src="https://via.placeholder.com/150" alt="Imagem do usuário">
+            <img src="https://via.placeholder.com/150" alt="https://i.ibb.co/phgw2Yc/feitos.png">
         </div>
         <div class="bio">
             <p class="biografia">Olá, meu nome é Alpa. Forneço uma variedade de serviços, incluindo design de logotipo minimalista, animação, guias de estilo de marca, desenvolvimento web e design de papelaria. Vamos dar as mãos e transformar seu negócio em uma marca reconhecível! Contate-me agora!</p>
