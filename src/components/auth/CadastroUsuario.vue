@@ -1,39 +1,22 @@
 <script setup>
 import { FooterComponent, HeaderComponent, HeaderSmall, FooterSmall } from "@/components";
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { useAuthStore } from '@/stores/auth'; 
+import { ref, onMounted } from 'vue';
 
-const router = useRouter();
-const authStore = useAuthStore();
+const isSmallScreen = ref(false);
+
+const checkScreenSize = () => {
+  isSmallScreen.value = window.innerWidth <= 768;
+};
+
+onMounted(() => {
+  checkScreenSize();
+  window.addEventListener('resize', checkScreenSize);
+});
 
 const username = ref('');
 const email = ref('');
 const password = ref('');
 const passwordConfirm = ref('');
-
-const errorMessage = ref('');
-
-const register = async () => {
-  if (password.value !== passwordConfirm.value) {
-    errorMessage.value = 'As senhas não coincidem!';
-    return;
-  }
-
-  const userData = {
-    username: username.value,
-    email: email.value,
-    password: password.value,
-  };
-
-  try {
-    await authStore.RegisterUser(userData);
-    router.push('/login'); 
-  } catch (error) {
-    errorMessage.value = 'Erro ao registrar usuário. Tente novamente mais tarde.';
-    console.error('Erro no registro:', error);
-  }
-};
 </script>
 
 <template>
@@ -45,30 +28,30 @@ const register = async () => {
 
     <div class="containerPrincipal">
       <div class="FormBot">
-        <form @submit.prevent="register" class="wrapForm"> <!-- Altere para chamar o método register -->
+        <form @submit.prevent="login" class="wrapForm">
           <h4 class="TextLeft">Olá!</h4>
           <p class="FormPLeft">Faça o seu cadastro por aqui!</p>
 
           <div class="input-container">
-            <input type="text" id="username" v-model="username" class="inputForm" />
+            <input type="text" id="username" class="inputForm" v-model="username" :class="{'active': username}" required />
             <label for="username" class="labelForm">Digite seu nome...</label>
           </div>
           <div class="input-container">
-            <input type="email" id="email" v-model="email" class="inputForm" />
+            <input type="email" id="email" class="inputForm" v-model="email" :class="{'active': email}" required />
             <label for="email" class="labelForm">Digite seu email...</label>
           </div>
           <div class="input-container">
-            <input type="password" id="password" v-model="password" class="inputForm" />
+            <input type="password" id="password" class="inputForm" v-model="password" :class="{'active': password}" required />
             <label for="password" class="labelForm">Crie sua senha...</label>
           </div>
           <div class="input-container">
-            <input type="password" id="password-confirm" v-model="passwordConfirm" class="inputForm" />
+            <input type="password" id="password-confirm" class="inputForm" v-model="passwordConfirm" :class="{'active': passwordConfirm}" required />
             <label for="password-confirm" class="labelForm">Confirme sua senha...</label>
           </div>
 
-          <button type="submit" class="btnCriar">Criar conta</button>
-
-          <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
+          <router-link to="/cadastro">
+            <button type="button" class="btnCriar">Criar conta</button>
+          </router-link>
           <p class="FormP Pf">Protegido por reCAPTCHA - Privacidade | Condições</p>
         </form>
       </div>
@@ -103,13 +86,6 @@ body {
   background: #006B63;
 }
 
-.error-message {
-  color: red;
-  margin-top: 10px;
-  font-size: 14px;
-}
-
-
 .containerPrincipal {
   width: 440px;
   background-color: white;
@@ -142,9 +118,10 @@ body {
 }
 
 .inputForm:focus + .labelForm,
-.labelForm.active {
+.inputForm.active + .labelForm {
   top: -10px;
   font-size: 12px;
+  color: #006B63;
 }
 
 .labelForm {
@@ -154,6 +131,7 @@ body {
   transform: translateY(-50%);
   transition: all 0.3s;
   pointer-events: none;
+  color: #666;
 }
 
 .btnCriar {
@@ -162,7 +140,6 @@ body {
   margin-top: 20px;
   font-size: 18px;
   font-weight: bold;
-  cursor: pointer;
   background-color: white;
   border: 2px solid #006B63;
   color: #006B63;

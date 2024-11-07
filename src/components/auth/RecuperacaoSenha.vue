@@ -1,39 +1,23 @@
 <script setup>
-import { HeaderComponent, HeaderSmall } from "@/components";
+import { HeaderComponent, HeaderSmall, FooterComponent, FooterSmall } from "@/components";
 import { ref, onMounted } from 'vue';
-import { useAuthStore } from "@/stores/auth";  
-import { useRouter } from 'vue-router';
 
 const isSmallScreen = ref(false);
-const email = ref(""); 
-
-const router = useRouter();
-const authStore = useAuthStore();
 
 const checkScreenSize = () => {
   isSmallScreen.value = window.innerWidth <= 768;
-};
-
-const forgotPassword = async () => {
-  try {
-    await authStore.ForgotPasswordUser(email.value); 
-    router.push("/validacao")
-    alert("Código de recuperação enviado para seu email!");
-  } catch (error) {
-    alert("Erro ao enviar o código de recuperação. Tente novamente.");
-  }
 };
 
 onMounted(() => {
   checkScreenSize();
   window.addEventListener('resize', checkScreenSize);
 });
+
+const email = ref('');
 </script>
 
 <template>
-  <!-- Header Grande (escondido em telas pequenas) -->
   <header-component v-if="!isSmallScreen" />
-  <!-- Header Pequeno (exibido apenas em telas pequenas) -->
   <header-small v-if="isSmallScreen" />
 
   <div class="wrapContainer">
@@ -42,31 +26,35 @@ onMounted(() => {
     </div>
     <div class="containerPrincipal">
       <div class="FormBot">
-        <form @submit.prevent="forgotPassword" class="wrapForm">
+        <form @submit.prevent="login" class="wrapForm">
           <h4 class="Text">Esqueceu sua senha?</h4>
 
           <div class="input-container">
             <input
               type="email"
               id="email"
-              class="marginForm inputForm"
-              v-model="email" 
-              required
+              class="inputForm"
+              v-model="email"
             />
-            <label for="email" class="labelForm">Digite seu email</label>
+            <label for="email" class="labelForm" :class="{ 'active': email }">Digite seu email</label>
           </div>
 
-          <button type="submit" class="btnCriar mt-3">Enviar Código</button>
+          <router-link to="/">
+            <button type="button" class="btnCriar mt-3">Enviar Código</button>
+          </router-link>
+
           <p class="mt-4 FormP Pf">Protegido por reCAPTCHA - Privacidade | Condições</p>
         </form>
       </div>
     </div>
   </div>
+
+  <footer-component v-if="!isSmallScreen" class="footer"/>
+  <footer-small v-if="isSmallScreen" />
 </template>
 
-
 <style scoped>
-.body {
+body {
   background: #006B63;
   height: 100vh;
   display: flex;
@@ -80,11 +68,12 @@ onMounted(() => {
 .wrapContainer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
-  min-height: 100vh;
+  min-height: 90vh;
   background: #006B63;
+  padding-top: 20px;
 }
 
 .containerPrincipal {
@@ -93,25 +82,15 @@ onMounted(() => {
   padding: 40px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
-  text-align: center; /* Mantém o restante do formulário centralizado */
-  
+  text-align: center;
 }
 
 .logo {
   width: 80px;
 }
 
-.TextLeft {
-  font-size: bold;
-  text-align: left; /* Alinha o texto "Olá!" à esquerda */
-}
-
 .Text {
-  font-size: 18px; /* Ajuste o tamanho conforme necessário */
-}
-
-.FormPLeft {
-  text-align: left; /* Alinha o texto "Para continuar, digite seu e-mail" à esquerda */
+  font-size: 18px;
 }
 
 .input-container {
@@ -128,9 +107,11 @@ onMounted(() => {
   transition: all 0.3s;
 }
 
-.inputForm:focus + .labelForm {
+.inputForm:focus + .labelForm,
+.labelForm.active {
   top: -10px;
   font-size: 12px;
+  color: #006B63;
 }
 
 .labelForm {
@@ -140,53 +121,24 @@ onMounted(() => {
   transform: translateY(-50%);
   transition: all 0.3s;
   pointer-events: none;
-}
-
-.labelForm.active {
-  top: -10px;
-  font-size: 12px;
+  color: #666;
 }
 
 .btnCriar {
   width: 100%;
   height: 45px;
   margin-top: 18px;
-  cursor: pointer;
   font-size: 18px;
   font-weight: bold;
-}
-
-.btnLogin {
-  background-color: #006B63;
-  color: white;
-  border: none;
-}
-
-.btnCriar {
   background-color: white;
   border: 2px solid #006B63;
   color: #006B63;
-  transition: all 0.3s ease; /* Transição para o hover */
+  transition: all 0.3s ease;
 }
 
 .btnCriar:hover {
-  background-color: #006B63; /* Cor de fundo no hover */
-  color: white; /* Cor do texto no hover */
-}
-
-.btnSenha {
-  margin-top: 20px;
-  border: none;
-  border-bottom: solid 1px #006B63;
-  background-color: white;
-  color: gray;
-  font-size: 15px;
-  text-decoration: none;
-}
-
-.btnSenha:hover {
-  color: #006B63;
-  transition: 0.7s;
+  background-color: #006B63;
+  color: white;
 }
 
 .Pf {
@@ -198,20 +150,19 @@ onMounted(() => {
   background: #006B63;
 }
 
-/* Estilos para telas pequenas */
 @media (max-width: 768px) {
   .containerPrincipal {
     width: 90%;
     padding: 20px;
   }
 
-  .btnLogin, .btnCriar {
+  .btnCriar {
     font-size: 16px;
     height: 40px;
   }
 
   .logo {
-    width: 140px; /* Diminui mais o tamanho da logo em telas pequenas */
+    width: 140px;
   }
 }
 
@@ -226,7 +177,7 @@ onMounted(() => {
     padding: 10px;
   }
 
-  .btnLogin, .btnCriar {
+  .btnCriar {
     height: 35px;
     font-size: 14px;
   }
