@@ -9,6 +9,8 @@ import CardsPrestadoresSmall from "@/components/homePage/cards/CardsPrestadoresS
 import CarouselOne from "@/components/homePage/cards/CarouselOne.vue";
 import CardsFeitos from "@/components/homePage/cards/CardsFeitos.vue";
 import ContentMainService from "./ServicePage/ContentMainService.vue";
+import CardsPerfil from "./PrestadoresPage/CardsPerfil.vue";
+import CardProjetos from "./PrestadoresPage/CardProjetos.vue"
 import LoadingPage from "./MainComponents/loading/LoadingPage.vue";
 import ContentMainJob from "./jobPage/ContentMainJob.vue";
 import HeaderLoggedPage from "./homeLoggedPage/HeaderLoggedPage.vue";
@@ -27,6 +29,9 @@ export {
     CardsPrestadoresSmall,
     CarouselOne,
     CardsFeitos,
+    ContentMainService,
+    CardsPerfil,
+    CardProjetos
     ContentMainService,
     LoadingPage,
     ContentMainJob,

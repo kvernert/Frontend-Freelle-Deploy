@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue';
 import LayoutFull from '@/layouts/LayoutFull.vue';
 import ServiceView from '@/views/ServiceView.vue';
 import LoginView from '@/views/LoginView.vue';
+import PrestadoresView from '@/views/PrestadoresView.vue'
 import UpdateProfile from '@/components/ProfilePage/UpdateProfile.vue';
 import JobView from '@/views/JobView.vue';
 import CadastroUsuario from '@/components/auth/CadastroUsuario.vue';
@@ -36,6 +37,11 @@ const router = createRouter({
       name: 'Login',
       component: LoginView,
     },
+    {
+      path: '/prestadores',
+      name: 'Prestadores',
+      component: PrestadoresView,
+    }
     {
       path: '/cadastro',
       name: 'Cadastro',

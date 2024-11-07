@@ -45,8 +45,13 @@
 .icons {
   display: flex;
   gap: 1rem;
+  cursor: pointer;
   align-items: center;
   font-size: 1.7rem;
   color: white;
+}
+
+.icons:hover{
+  color: #28524f;
 }
 </style>
