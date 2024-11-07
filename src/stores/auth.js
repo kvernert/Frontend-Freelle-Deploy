@@ -12,7 +12,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   const loadingStore = useLoadingStore();
 
-  const isLogged = computed(() => !!state.token);  
+  const isLogged = computed(() => !!state.token);
 
   function setToken(newToken) {
     state.token = newToken;
@@ -52,16 +52,40 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  async function getUserToken() {
-    if (!state.token) return null;
+  async function ForgotPasswordUser(email) {
+    loadingStore.startLoading();
     try {
-      const response = await authService.postUserToken(state.token);
+      const response = await authService.ForgotPasswordUser(email);
       return response;
     } catch (error) {
-      console.error('Erro ao obter o token do usuário:', error);
+      console.error('Erro ao solicitar recuperação de senha:', error);
       throw error;
+    } finally {
+      loadingStore.stopLoading();
     }
   }
 
-  return { state, setToken, LoginUser, LogoutUser, RegisterUser, getUserToken, isLogged };
+  async function ResetPasswordUser(reset_code, new_passoword) {
+    loadingStore.startLoading();
+    try {
+      const response = await authService.ResetPasswordUser(reset_code, new_passoword); 
+      return response;
+    } catch (error) {
+      console.error('Erro ao resetar a senha:', error);
+      throw error;
+    } finally {
+      loadingStore.stopLoading();
+    }
+  }
+
+  return { 
+    state, 
+    setToken, 
+    LoginUser, 
+    LogoutUser, 
+    RegisterUser, 
+    ForgotPasswordUser, 
+    ResetPasswordUser, 
+    isLogged 
+  };
 });
