@@ -169,7 +169,7 @@ const searchQuery = ref('')
   border-radius: 0.5em;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   top: 60px;
-  right: 1em;
+  right: 8em;
   z-index: 10;
 }
 

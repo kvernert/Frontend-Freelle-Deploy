@@ -4,11 +4,13 @@ import { ref, onMounted, computed } from 'vue';
 import { useUserStore } from '@/stores/user';
 import { useNacionalidadeStore } from '@/stores/nacionalidade';
 import { useFormacaoStore } from '@/stores/formacao';
+import { useRouter } from "vue-router";
 
 const isSmallScreen = ref(false);
 const userStore = useUserStore();
 const nacionalidadeStore = useNacionalidadeStore();
 const formacaoStore = useFormacaoStore();
+const router = useRouter()
 
 const checkScreenSize = () => {
   isSmallScreen.value = window.innerWidth <= 768;
@@ -73,6 +75,7 @@ const updateProfile = async () => {
     }
 
     await userStore.updateMeUser(authToken, formData);
+    router.push("/home-logged")
     alert('Perfil atualizado com sucesso!');
   } catch (error) {
     console.error('Erro ao atualizar o perfil:', error);
